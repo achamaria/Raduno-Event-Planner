@@ -14,3 +14,19 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+
+
+ion-header{
+  ion-navbar{
+    .navLogo{
+      height: 50px;
+      float: left;
+    }
+    ion-title{
+      text-align: center;
+      margin-top: 10px;
+    }
+  }
+}
+

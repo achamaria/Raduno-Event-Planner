@@ -1,0 +1,27 @@
+
+page-login {
+  #login{
+    background-color: color($colors, primary);
+    .loginBtn{
+      margin-left: 15px;
+    }
+    ion-item{
+      background-color: color($colors, primary);
+    }
+    .navLogo{
+      height: 20%;
+      margin: 0 33%;
+    }
+    h1{
+      text-align: center;
+    }
+    a.forgot{
+      color: color($colors, dark);
+      margin: 0 33%;
+    }
+    a.register{
+      color: color($colors, dark);
+      margin: 0 29%;
+    }
+  }
+}
