@@ -19,14 +19,46 @@
 
 ion-header{
   ion-navbar{
-    .navLogo{
-      height: 50px;
-      float: left;
-    }
     ion-title{
       text-align: center;
-      margin-top: 10px;
     }
   }
 }
+
+#login, #register, #forgot{
+  background-color: color($colors, primary);
+  form{
+    margin-top: 60px;
+  }
+  .loginBtn, .registerBtn, .changePassBtn{
+     margin-left: 15px;
+  }
+  .registerBtn, .changePassBtn{
+    button, a{
+      width: 48.3%;
+    }
+  }
+  ion-item{
+    background-color: color($colors, primary);
+  }
+  .navLogo{
+    height: 20%;
+    margin: 0 33%;
+  }
+  h1{
+    text-align: center;
+  }
+  a.forgot{
+    color: color($colors, dark);
+    margin: 0 33%;
+  }
+  a.register{
+    color: color($colors, dark);
+    margin: 0 29%;
+  }
+}
+
+.item-input .label-md, .item-datetime .label-md{
+    color: white;
+  }
 

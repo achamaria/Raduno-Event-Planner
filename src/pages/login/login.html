@@ -9,17 +9,23 @@
 <ion-content padding id="login">
   <img src="assets/imgs/logo.png" class="navLogo" />
   <h1> Welcome to Raduno</h1>
-  <ion-item>
-    <ion-input type="text" placeholder="Username"></ion-input>
-  </ion-item>
-  <ion-item>
-    <ion-input type="password" placeholder="Password"></ion-input>
-  </ion-item><br>
-  <div class="loginBtn">
 
-    <button ion-button full color="dark">Login</button>
-  </div>
+  <form [formGroup]="loginGroup" (ngSubmit)="showDashboard()">
+    <ion-item>
+      <ion-label>Username :</ion-label>
+      <ion-input type="text" formControlName="username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Password :</ion-label>
+      <ion-input type="password" formControlName="password"></ion-input>
+    </ion-item><br>
+    <div class="loginBtn">
+
+      <button ion-button block color="dark" type="submit" >Login</button>
+    </div>
+  </form>
+
   <br>
-  <a class="forgot" onclick="forgot()"> Forgot password?</a><br><br>
-  <a class="register" onclick="register()" href="../register/register"> Don't have an account?</a>
+  <a (click)="forgot()" class="forgot" >Forgot password? </a><br><br>
+  <a class="register" (click)="register()"> Don't have an account?</a>
 </ion-content>

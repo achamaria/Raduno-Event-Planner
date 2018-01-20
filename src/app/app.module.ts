@@ -10,16 +10,33 @@ import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
 
+import { ComponentsModule } from '../components/components.module';
+import {TabsPage} from "../pages/tabs/tabs";
+import {ChatPage} from "../pages/chat/chat";
+import {ShopPage} from "../pages/shop/shop";
+import {BudgetPage} from "../pages/budget/budget";
+import {CalendarPage} from "../pages/calendar/calendar";
+import {ProfilePage} from "../pages/profile/profile";
+import {SettingsPage} from "../pages/settings/settings";
+
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
     RegisterPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    TabsPage,
+    ChatPage,
+    ShopPage,
+    BudgetPage,
+    CalendarPage,
+    ProfilePage,
+    SettingsPage
   ],
   imports: [
     BrowserModule,
+    ComponentsModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -28,7 +45,14 @@ import { ForgotPasswordPage } from '../pages/forgot-password/forgot-password';
     HomePage,
     LoginPage,
     RegisterPage,
-    ForgotPasswordPage
+    ForgotPasswordPage,
+    TabsPage,
+    ChatPage,
+    ShopPage,
+    BudgetPage,
+    CalendarPage,
+    ProfilePage,
+    SettingsPage
   ],
   providers: [
     StatusBar,
