@@ -4,7 +4,6 @@ import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { ForgotPasswordPage } from "../forgot-password/forgot-password";
 import { RegisterPage } from "../register/register";
-import { HomePage } from "../home/home";
 import {TabsPage} from "../tabs/tabs";
 /**
  * Generated class for the LoginPage page.

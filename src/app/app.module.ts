@@ -18,6 +18,10 @@ import {BudgetPage} from "../pages/budget/budget";
 import {CalendarPage} from "../pages/calendar/calendar";
 import {ProfilePage} from "../pages/profile/profile";
 import {SettingsPage} from "../pages/settings/settings";
+import {FeedbackPage} from "../pages/feedback/feedback";
+import {FAQsPage} from "../pages/fa-qs/fa-qs";
+import {EventPage} from "../pages/event/event";
+import {GreetingPage} from "../pages/greeting/greeting";
 
 @NgModule({
   declarations: [
@@ -27,12 +31,16 @@ import {SettingsPage} from "../pages/settings/settings";
     RegisterPage,
     ForgotPasswordPage,
     TabsPage,
+    EventPage,
+    GreetingPage,
     ChatPage,
     ShopPage,
     BudgetPage,
     CalendarPage,
     ProfilePage,
-    SettingsPage
+    SettingsPage,
+    FeedbackPage,
+    FAQsPage
   ],
   imports: [
     BrowserModule,
@@ -47,12 +55,16 @@ import {SettingsPage} from "../pages/settings/settings";
     RegisterPage,
     ForgotPasswordPage,
     TabsPage,
+    EventPage,
+    GreetingPage,
     ChatPage,
     ShopPage,
     BudgetPage,
     CalendarPage,
     ProfilePage,
-    SettingsPage
+    SettingsPage,
+    FeedbackPage,
+    FAQsPage
   ],
   providers: [
     StatusBar,
