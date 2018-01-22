@@ -33,11 +33,9 @@ export class TabsPage {
   settingsRoot = SettingsPage;
   feedbackRoot = FeedbackPage;
   faqRoot = FAQsPage;
-  myIndex: number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    // Set the active tab based on the passed index from app.components.ts
-    this.myIndex = navParams.data.tabIndex || 6;
+
   }
 
   ionViewDidLoad() {

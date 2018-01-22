@@ -14,8 +14,8 @@ import { TabsPage } from "../pages/tabs/tabs";
 export interface PageInterface {
   title: string;
   pageName: string;
-  component?: any;
-  index?: number;
+  component: any;
+  index: number;
   icon: string;
 }
 
@@ -48,21 +48,10 @@ export class MyApp {
 
 
   openPage(page: PageInterface) {
-    let params = {};
-
-    // The index is equal to the order of our tabs inside tabs.ts
-    if (page.index) {
-      params = { tabIndex: page.index };
-    }
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario// The active child nav is our Tabs Navigation
-    if (this.nav.getActiveChildNav() && page.index != undefined) {
       this.nav.getActiveChildNav().select(page.index);
-    } else {
-      // Tabs are not active, so reset the root page
-      // In this case: moving to or from SpecialPage
-      this.nav.setRoot(page.pageName, params);
-    }
+
   }
 
   isActive(page: PageInterface) {
