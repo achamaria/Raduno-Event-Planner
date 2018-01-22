@@ -7,38 +7,34 @@
 <ion-content padding id="register">
   <img src="assets/imgs/logo.png" class="navLogo" />
 
-  <form [formGroup]="registerGroup" (ngSubmit)="showDashboard()">
+  <form>
     <ion-item>
       <ion-label>Full Name :</ion-label>
-      <ion-input type="text" formControlName="fullname"></ion-input>
+      <ion-input name="name" [(ngModel)]="profile.name" type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Username :</ion-label>
-      <ion-input type="text" formControlName="username"></ion-input>
+      <ion-input name="username" [(ngModel)]="profile.username"  type="text"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Email :</ion-label>
-      <ion-input type="email" formControlName="email"></ion-input>
+      <ion-input name="email" type="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Password :</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label>Confirm Password :</ion-label>
-      <ion-input type="password" formControlName="confirmPass"></ion-input>
+      <ion-input name="password" type="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Phone Number :</ion-label>
-      <ion-input type="number" formControlName="phone"></ion-input>
+      <ion-input name="phone" [(ngModel)]="profile.phone"  type="number"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Date :</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY" formControlName="date" [(ngModel)]="myDate"></ion-datetime>
+      <ion-label>Date of Birth :</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY"  name="dob" [(ngModel)]="profile.dob"></ion-datetime>
     </ion-item>
     <br>
     <div class="registerBtn">
-      <button ion-button color="dark" type="submit">Register</button>
+      <button ion-button color="dark" (click)="register(user, profile)" type="submit">Register</button>
       <a ion-button color="secondary" (click)="showLogin()">Login</a>
     </div>
   </form>

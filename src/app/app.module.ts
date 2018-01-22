@@ -23,6 +23,11 @@ import {FAQsPage} from "../pages/fa-qs/fa-qs";
 import {EventPage} from "../pages/event/event";
 import {GreetingPage} from "../pages/greeting/greeting";
 
+import {AngularFireAuthModule} from "angularfire2/auth";
+import {AngularFireModule} from "angularfire2";
+import {FIREBASE_CONFIG} from "./app.firebase.config";
+import {AngularFireDatabaseModule} from "angularfire2/database";
+
 @NgModule({
   declarations: [
     MyApp,
@@ -45,7 +50,10 @@ import {GreetingPage} from "../pages/greeting/greeting";
   imports: [
     BrowserModule,
     ComponentsModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp(FIREBASE_CONFIG),
+    AngularFireAuthModule,
+    AngularFireDatabaseModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -69,7 +77,7 @@ import {GreetingPage} from "../pages/greeting/greeting";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
 export class AppModule {}

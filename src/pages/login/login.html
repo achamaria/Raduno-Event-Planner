@@ -10,18 +10,17 @@
   <img src="assets/imgs/logo.png" class="navLogo" />
   <h1> Welcome to Raduno</h1>
 
-  <form [formGroup]="loginGroup" (ngSubmit)="showDashboard()">
+  <form>
     <ion-item>
-      <ion-label>Username :</ion-label>
-      <ion-input type="text" formControlName="username"></ion-input>
+      <ion-label>Email :</ion-label>
+      <ion-input name="email" type="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Password :</ion-label>
-      <ion-input type="password" formControlName="password"></ion-input>
-    </ion-item><br>
+      <ion-input name="password" type="password" [(ngModel)]="user.password"></ion-input>
+    </ion-item>
     <div class="loginBtn">
-
-      <button ion-button block color="dark" type="submit" >Login</button>
+      <button ion-button block color="dark" (click)="login(user)">Login</button>
     </div>
   </form>
 

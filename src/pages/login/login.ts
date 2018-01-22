@@ -1,10 +1,15 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, AlertController, ToastController} from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { ForgotPasswordPage } from "../forgot-password/forgot-password";
 import { RegisterPage } from "../register/register";
 import {TabsPage} from "../tabs/tabs";
+import {User} from "../../models/user";
+// import {AngularFireAuth} from "angularfire2/auth";
+import {HomePage} from "../home/home";
+import {AngularFireAuth} from "angularfire2/auth";
+
 /**
  * Generated class for the LoginPage page.
  *
@@ -19,9 +24,12 @@ import {TabsPage} from "../tabs/tabs";
 })
 export class LoginPage {
 
+  user = {} as User;
+
   private loginGroup : FormGroup;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
+              public alertCtrl: AlertController, private afAuth: AngularFireAuth, private toast: ToastController) {
     this.loginGroup = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required]
@@ -76,4 +84,20 @@ export class LoginPage {
 
   }
 
+  async login(user: User) {
+    try {
+      const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+      console.log(result);
+      if(result) {
+
+        console.log("in result function");
+        this.navCtrl.setRoot(TabsPage);
+      }
+    }catch (e){
+      this.toast.create({
+        message: `Could not find the user.`,
+        duration: 3000,
+      }).present();
+    }
+  }
 }
