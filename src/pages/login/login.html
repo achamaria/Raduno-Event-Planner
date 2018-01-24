@@ -18,12 +18,11 @@
     <ion-item>
       <ion-label>Password :</ion-label>
       <ion-input name="password" type="password" [(ngModel)]="user.password"></ion-input>
-    </ion-item>
+    </ion-item> <br>
     <div class="loginBtn">
       <button ion-button block color="dark" (click)="login(user)">Login</button>
     </div>
   </form>
-
   <br>
   <a (click)="forgot()" class="forgot" >Forgot password? </a><br><br>
   <a class="register" (click)="register()"> Don't have an account?</a>
