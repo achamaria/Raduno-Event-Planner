@@ -27,8 +27,11 @@ ion-header{
 
 #login, #register, #forgot{
   background-color: color($colors, primary);
+  .item-input .label-md, .item-datetime .label-md{
+    color: white;
+  }
   form{
-    margin-top: 60px;
+    margin-top: 40px;
   }
   .loginBtn, .registerBtn, .changePassBtn{
      margin-left: 15px;
@@ -66,9 +69,10 @@ ion-header{
   }
 }
 
-.item-input .label-md, .item-datetime .label-md{
-    color: white;
-  }
+#profile, #editProfile{
+  margin-top: 50px;
+}
+
 .scroll-content{
   overflow-x: unset;
   overflow-y: unset;

@@ -34,22 +34,18 @@ export class EditProfilePage {
       this.afDatabase.list(`profile/${auth.uid}`).valueChanges().subscribe(profile => {
         this.profile = profile[0];
         this.editProfile = this.profile;
-        console.log("profiledata: ");
-        console.log(profile[0]);
-        console.log(auth);
       });
     });
   }
 
+  // update profile data
    updateProfile(currUser: any, profile: any) {
      this.afAuth.authState.subscribe(auth => {
        this.updateProfileData = profile;
-
        this.afDatabase.list(`profile/${auth.uid}`).remove();
        this.afDatabase.list(`profile/${auth.uid}`).update(auth.uid, this.updateProfileData);
        auth.updateEmail(currUser.email);
        auth.updatePassword(currUser.password);
-       console.log("djfdhjfhdsfjdsh");
        this.navCtrl.push(ProfilePage);
      });
 

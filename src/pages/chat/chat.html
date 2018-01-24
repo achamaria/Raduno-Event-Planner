@@ -2,3 +2,10 @@
 <ion-content padding>
 
 </ion-content>
+
+<ion-footer>
+    <ion-input type="text" [(ngModel)]="message" placeholder="Type here..."></ion-input>
+    <button ion-button icon-only (click)="sendMessage()">
+      <ion-icon name="send"></ion-icon>
+    </button>
+</ion-footer>

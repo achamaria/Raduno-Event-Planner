@@ -1,3 +1,11 @@
 page-chat {
-
+  ion-footer{
+    ion-input, button{
+      display: inline-block;
+    }
+    ion-input{
+      padding-left: 10px;
+      width: 83.9%;
+    }
+  }
 }
