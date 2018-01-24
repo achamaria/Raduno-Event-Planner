@@ -27,6 +27,7 @@ import {AngularFireAuthModule} from "angularfire2/auth";
 import {AngularFireModule} from "angularfire2";
 import {FIREBASE_CONFIG} from "./app.firebase.config";
 import {AngularFireDatabaseModule} from "angularfire2/database";
+import {EditProfilePage} from "../pages/edit-profile/edit-profile";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {AngularFireDatabaseModule} from "angularfire2/database";
     ProfilePage,
     SettingsPage,
     FeedbackPage,
-    FAQsPage
+    FAQsPage,
+    EditProfilePage
   ],
   imports: [
     BrowserModule,
@@ -72,7 +74,8 @@ import {AngularFireDatabaseModule} from "angularfire2/database";
     ProfilePage,
     SettingsPage,
     FeedbackPage,
-    FAQsPage
+    FAQsPage,
+    EditProfilePage
   ],
   providers: [
     StatusBar,
