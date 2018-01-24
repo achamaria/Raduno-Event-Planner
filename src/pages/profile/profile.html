@@ -14,6 +14,14 @@
    </ion-row>
    <ion-row text-center>
      <ion-col ion-text col-3>
+       Username
+     </ion-col>
+     <ion-col col-9>
+       {{user.username}}
+     </ion-col>
+   </ion-row>
+   <ion-row text-center>
+     <ion-col ion-text col-3>
         Email
      </ion-col>
      <ion-col col-9>
@@ -51,7 +59,7 @@
    </ion-row>
    <ion-row text-center>
      <ion-col col-12>
-       <button ion-button color="danger">Delete Account</button>
+       <button ion-button color="danger" (click)="deleteAccount()">Delete Account</button>
      </ion-col>
    </ion-row>
  </ion-grid>

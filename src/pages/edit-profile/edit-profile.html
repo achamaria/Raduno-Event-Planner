@@ -1,18 +1,42 @@
-<!--
-  Generated template for the EditProfilePage page.
+<header pageTitle="Edit Profile" edit="true"></header>
 
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-header>
-
-  <ion-navbar>
-    <ion-title>EditProfile</ion-title>
-  </ion-navbar>
-
-</ion-header>
-
-
-<ion-content padding>
-
+<ion-content>
+  <br><br><br>
+  <form>
+    <ion-grid>
+      <ion-row text-center>
+        <ion-col col-12>
+          <img width="80" height="80" src="assets/imgs/user-logo.png">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item>
+      <ion-label>Full Name :</ion-label>
+      <ion-input name="name" [(ngModel)]="editProfile.name" type="text" [value]="editProfile.name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Username :</ion-label>
+      <ion-input name="username" [(ngModel)]="editProfile.username"  type="text" [value]="editProfile.username"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email :</ion-label>
+      <ion-input name="email" type="email" [(ngModel)]="editUser.email" [value]="editUser.email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Password :</ion-label>
+      <ion-input name="password" type="password" [(ngModel)]="editUser.password"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Phone Number :</ion-label>
+      <ion-input name="phone" [(ngModel)]="editProfile.phone"  type="number" [value]="editProfile.phone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date of Birth :</ion-label>
+      <ion-input name="dob" [(ngModel)]="editProfile.dob"  [value]="editProfile.dob" type="text" [value]="editProfile.phone" readonly></ion-input>
+    </ion-item>
+    <br>
+    <div text-center class="registerBtn">
+      <button  ion-button  color="primary" (click)="updateProfile(editUser, editProfile)" type="submit">Update</button>
+    </div>
+  </form>
 </ion-content>
