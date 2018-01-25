@@ -1,6 +1,7 @@
 <header pageTitle="Edit Profile" edit="true"></header>
 
 <ion-content padding id="editProfile">
+
   <form>
     <ion-grid>
       <ion-row text-center>
@@ -18,12 +19,15 @@
       <ion-input name="username" [(ngModel)]="editProfile.username"  type="text" [value]="editProfile.username"></ion-input>
     </ion-item>
     <ion-item>
-      <ion-label>Email :</ion-label>
-      <ion-input name="email" type="email" [(ngModel)]="editUser.email" [value]="editUser.email"></ion-input>
+      <ion-label>Current Email : {{currUser.email}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Password :</ion-label>
-      <ion-input name="password" type="password" [(ngModel)]="editUser.password"></ion-input>
+      <ion-label>New Email :</ion-label>
+      <ion-input name="email" type="email" [(ngModel)]="newEmail" [value]="newEmail"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>New Password :</ion-label>
+      <ion-input name="password" type="password" [(ngModel)]="newPassword"  [value]="newPassword"></ion-input>
     </ion-item>
     <ion-item>
       <ion-label>Phone Number :</ion-label>
@@ -35,7 +39,7 @@
     </ion-item>
     <br>
     <div text-center class="registerBtn">
-      <button  ion-button  color="primary" (click)="updateProfile(editUser, editProfile)" type="submit">Update</button>
+      <button  ion-button  color="primary" (click)="updateProfile()" type="submit">Update</button>
     </div>
   </form>
 </ion-content>

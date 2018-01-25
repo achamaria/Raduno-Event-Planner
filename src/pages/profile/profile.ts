@@ -19,7 +19,7 @@ export class ProfilePage {
       this.afDatabase.list(`profile/${auth.uid}`).valueChanges().subscribe(profile => {
         this.profile = profile;
         console.log("profiledata: ");
-        console.log(profile);
+        console.log(this.profile);
         console.log(auth);
       });
     });

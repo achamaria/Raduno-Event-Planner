@@ -17,7 +17,7 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.afAuth.authState.subscribe(data=>{
-      if(data && data.email && data.uid) {
+      if(/*data && data.email && */data.uid) {
         this.toast.create({
           message: `Welcome to Raduno, ${data.email}`,
           duration: 3000,
