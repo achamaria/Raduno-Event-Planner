@@ -28,6 +28,9 @@ import {AngularFireModule} from "angularfire2";
 import {FIREBASE_CONFIG} from "./app.firebase.config";
 import {AngularFireDatabaseModule} from "angularfire2/database";
 import {EditProfilePage} from "../pages/edit-profile/edit-profile";
+import { HttpClientModule } from '@angular/common/http';
+import { ShopProvider } from '../providers/shop/shop';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
 
 @NgModule({
   declarations: [
@@ -55,7 +58,8 @@ import {EditProfilePage} from "../pages/edit-profile/edit-profile";
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -80,6 +84,9 @@ import {EditProfilePage} from "../pages/edit-profile/edit-profile";
   providers: [
     StatusBar,
     SplashScreen,
+    HttpClientModule,
+    ShopProvider,
+    InAppBrowser
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
