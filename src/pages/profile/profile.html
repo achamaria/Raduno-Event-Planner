@@ -3,9 +3,14 @@
 <ion-content padding *ngFor="let user of profile" id="profile">
  <ion-grid>
    <ion-row text-center>
-     <ion-col col-12>
-       <img width="80" height="80" src="assets/imgs/user-logo.png">
+     <ion-col col-12 *ngIf="picData['i'];else other_content">
+       <img width="80" height="80" src="{{ picData['i'] }}">
      </ion-col>
+     <ng-template #other_content>
+       <ion-col col-12>
+         <img width="80" height="80" src="assets/imgs/user-logo.png">
+       </ion-col>
+     </ng-template>
      <ion-col col-12>
        <h1>{{user["name"]}}</h1>
      </ion-col>

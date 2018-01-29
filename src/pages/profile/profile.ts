@@ -4,6 +4,8 @@ import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
 import {EditProfilePage} from "../edit-profile/edit-profile";
 import {LoginPage} from "../login/login";
+import firebase from "firebase";
+import {FirebaseObjectObservable} from "angularfire2/database-deprecated";
 
 @IonicPage()
 @Component({
@@ -13,9 +15,17 @@ import {LoginPage} from "../login/login";
 export class ProfilePage {
   profile: any;
   currUser: any;
+  picData: any;
   constructor(public navCtrl: NavController, public navParams: NavParams,private afAuth:AngularFireAuth,private afDatabase :AngularFireDatabase) {
     this.afAuth.authState.subscribe(auth => {
       this.currUser = auth;
+      this.picData = firebase.storage().ref('/').child(this.currUser.uid).getDownloadURL()
+        .then(function(url){
+          console.log("log1: " + url);
+          return url;
+        }).catch(res=>{
+          console.log("errrrrrrrrrrrrrrrrrrrrrr");
+        });
       this.afDatabase.list(`profile/${auth.uid}`).valueChanges().subscribe(profile => {
         this.profile = profile;
         console.log("profiledata: ");
@@ -23,6 +33,7 @@ export class ProfilePage {
         console.log(auth);
       });
     });
+
   }
 
   editProfile(){
@@ -40,6 +51,25 @@ export class ProfilePage {
   }
 
   ionViewDidLoad() {
+  }
+
+  ionViewWillEnter(){
+    this.afAuth.authState.subscribe(auth => {
+      this.currUser = auth;
+      this.picData = firebase.storage().ref('/').child(this.currUser.uid).getDownloadURL()
+        .then(function(url){
+          console.log("log1: " + url);
+          return url;
+        }).catch(res=>{
+          console.log("errrrrrrrrrrrrrrrrrrrrrr");
+        });
+      this.afDatabase.list(`profile/${auth.uid}`).valueChanges().subscribe(profile => {
+        this.profile = profile;
+        console.log("profiledata: ");
+        console.log(this.profile);
+        console.log(auth);
+      });
+    });
   }
 
 }

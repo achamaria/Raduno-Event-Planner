@@ -5,11 +5,30 @@
   <form>
     <ion-grid>
       <ion-row text-center>
-        <ion-col col-12>
-          <img width="80" height="80" src="assets/imgs/user-logo.png">
+        <ion-col col-12 *ngIf="picData['i'];else other_content">
+          <img width="80" height="80" src="{{ picData['i'] }}">
+        </ion-col>
+      <ng-template #other_content>
+        <ion-col col-12 text-center>
+           <img width="80" height="80" src="assets/imgs/user-logo.png">
+        </ion-col>
+      </ng-template>
+      </ion-row>
+      <ion-row text-center>
+        <ion-col col-5>
+          <div>
+            <button ion-button round outline (click)="getMedia()">Choose an image</button>
+          </div>
+        </ion-col>
+        <ion-col col-2></ion-col>
+        <ion-col col-5>
+          <div>
+            <button ion-button round outline (click)="takePic()">Take a Picture</button>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>
+
     <ion-item>
       <ion-label>Full Name :</ion-label>
       <ion-input name="name" [(ngModel)]="editProfile.name" type="text" [value]="editProfile.name"></ion-input>
