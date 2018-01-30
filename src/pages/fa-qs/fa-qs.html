@@ -1,5 +1,24 @@
 <header pageTitle="FAQs"></header>
 
 <ion-content padding>
-
+  <br><br><br>
+    <div *ngFor="let q of faqChat">
+      <p text-right>{{ q["question"] }}</p>
+      <p text-left>{{ q["answer"] }}</p>
+    </div>
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-10>
+        <ion-input type="text" float-left [(ngModel)]="queryForm" placeholder="Type here..."></ion-input>
+      </ion-col>
+      <ion-col col-2>
+        <button ion-button icon-only float-right (click)="getAnswer()">
+          <ion-icon name="send"></ion-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-footer>

@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AngularFireDatabase} from "angularfire2/database";
+import {AngularFireAuth} from "angularfire2/auth";
+import {TabsPage} from "../tabs/tabs";
+import firebase from "firebase";
 
 /**
  * Generated class for the SettingsPage page.
@@ -15,11 +19,31 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  notifications: any;
+  language: any;
+  location: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {
+    this.afAuth.authState.subscribe(auth => {
+      this.afDatabase.list(`settings/${auth.uid}/notification`).valueChanges().subscribe(settings => {
+        this.notifications = settings[0]["notification"];
+        console.log("setting data: ");
+        console.log(settings[0]["notification"]);
+      });
+    });
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SettingsPage');
+  }
+
+  updateItem(){
+    this.afAuth.authState.take(1).subscribe(auth => {
+      this.afDatabase.list(`settings/${auth.uid}/notification`).remove();
+      this.afDatabase.list(`settings/${auth.uid}/notification`)
+        .push({"notification": this.notifications})
+        .then(() => this.navCtrl.push(TabsPage));
+    });
   }
 
 }

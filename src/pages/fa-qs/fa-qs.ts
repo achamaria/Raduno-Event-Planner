@@ -1,25 +1,32 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the FaQsPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import {FaqProvider} from "../../providers/faq/faq";
+import {query} from "@angular/core/src/animation/dsl";
 
 @IonicPage()
 @Component({
   selector: 'page-fa-qs',
   templateUrl: 'fa-qs.html',
 })
+
 export class FAQsPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  faqChat: any = [];
+  queryForm: any;
+  answer: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public faqProvider: FaqProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FaQsPage');
+  }
+
+  getAnswer() {
+    this.faqProvider.getAnswer(this.queryForm).then(data => {
+      this.answer = data["answers"][0]["answer"];
+      this.faqChat.push({"question": this.queryForm, "answer": this.answer});
+    });
   }
 
 }

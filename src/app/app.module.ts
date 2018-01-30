@@ -31,6 +31,9 @@ import {EditProfilePage} from "../pages/edit-profile/edit-profile";
 import { HttpClientModule } from '@angular/common/http';
 import { ShopProvider } from '../providers/shop/shop';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
+import {Ionic2RatingModule} from "ionic2-rating";
+import { FaqProvider } from '../providers/faq/faq';
+
 
 @NgModule({
   declarations: [
@@ -59,7 +62,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    HttpClientModule
+    HttpClientModule,
+    Ionic2RatingModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -86,7 +90,9 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
     SplashScreen,
     HttpClientModule,
     ShopProvider,
-    InAppBrowser
+    InAppBrowser,
+    Ionic2RatingModule,
+    FaqProvider
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

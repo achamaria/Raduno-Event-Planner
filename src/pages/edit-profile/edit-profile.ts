@@ -7,7 +7,7 @@ import {Profile} from "../../models/profile";
 import firebase from "firebase";
 import {ProfilePage} from "../profile/profile";
 import {Camera, File} from "ionic-native"
-import {FirebaseObjectObservable} from "angularfire2/database";
+import {FirebaseObjectObservable} from "angularfire2/database-deprecated";
 declare var window: any;
 
 /**
@@ -46,6 +46,7 @@ export class EditProfilePage {
   public Fbref:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private afAuth:AngularFireAuth, private afDatabase :AngularFireDatabase) {
+
     this.mypicref = firebase.storage().ref('/');
 
     this.Fbref = firebase.storage().ref('/');
