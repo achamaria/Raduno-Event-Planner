@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, AlertController, ToastController} from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import {IonicPage, NavController, NavParams, AlertController, ToastController, MenuController} from 'ionic-angular';
+import {Validators, FormBuilder, FormGroup, AbstractControl} from '@angular/forms';
 
 import { ForgotPasswordPage } from "../forgot-password/forgot-password";
 import { RegisterPage } from "../register/register";
@@ -28,12 +28,20 @@ export class LoginPage {
 
   private loginGroup : FormGroup;
 
+  password: AbstractControl;
+  email: AbstractControl;
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
-              public alertCtrl: AlertController, private afAuth: AngularFireAuth, private toast: ToastController) {
+              public alertCtrl: AlertController, private afAuth: AngularFireAuth, private toast: ToastController,
+              public menu: MenuController) {
     this.loginGroup = this.formBuilder.group({
-      username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required]
     });
+
+    this.email = this.loginGroup.controls['email'];
+    this.password = this.loginGroup.controls['password'];
+    this.menu.enable(false);
   }
 
   ionViewDidLoad() {
@@ -48,56 +56,34 @@ export class LoginPage {
     this.navCtrl.push(RegisterPage, null);
   }
 
-  showDashboard() {
-    let user = this.loginGroup.value;
-    if (user.username != "" && user.password != ""){
-      if (user.username == "admin" && user.password == "admin") {
-        this.navCtrl.push(TabsPage, {
-          username: user.username
-        });
-      }
-      else
-        this.showAlert("incorrect");
-    }
-    else{
-      this.showAlert("empty");
-    }
-  }
-
-  showAlert(str: String) {
-    let alertIncorrect = this.alertCtrl.create({
-      title: 'Alert!',
-      subTitle: 'Incorrect username or password',
-      buttons: ['OK']
-    });
-
+  showAlert() {
     let alertEmpty = this.alertCtrl.create({
       title: 'Required!',
-      subTitle: 'Username and password should not be empty',
+      subTitle: 'email and password should not be empty',
       buttons: ['OK']
     });
 
-    if(str == "empty")
-      alertEmpty.present();
-    else
-      alertIncorrect.present();
+    alertEmpty.present();
 
   }
 
   async login(user: User) {
-    try {
-      const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
-      console.log(result);
-      if(result) {
-
-        console.log("in result function");
-        this.navCtrl.setRoot(TabsPage);
+    if (this.loginGroup.valid) {
+      try {
+        const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email, user.password);
+        console.log(result);
+        if (result) {
+          this.navCtrl.setRoot(TabsPage);
+        }
+      } catch (e) {
+        this.toast.create({
+          message: `Could not find the user.`,
+          duration: 3000,
+        }).present();
       }
-    }catch (e){
-      this.toast.create({
-        message: `Could not find the user.`,
-        duration: 3000,
-      }).present();
+    }
+    else{
+      this.showAlert();
     }
   }
 }

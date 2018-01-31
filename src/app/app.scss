@@ -67,6 +67,11 @@ ion-header{
     color: color($colors, dark);
     margin: 0 23%;
   }
+  .danger{
+    color: red;
+    padding-left: 5%;
+
+  }
 }
 
 #profile, #editProfile{
