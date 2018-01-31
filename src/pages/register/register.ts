@@ -22,7 +22,6 @@ export class RegisterPage {
   profile = {} as Profile;
 
   private registerFormGroup : FormGroup;
-  submitAttempt: boolean = false;
 
   fname: AbstractControl;
   username: AbstractControl;
@@ -54,8 +53,6 @@ export class RegisterPage {
   }
 
   async register(user: User, profile: Profile) {
-
-    this.submitAttempt = true;
 
     if(!this.registerFormGroup.valid){
       this.showAlert();
