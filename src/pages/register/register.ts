@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup } from '@angular/forms';
+import {Validators, FormBuilder, FormGroup, AbstractControl} from '@angular/forms';
 import {AngularFireAuth} from "angularfire2/auth";
 import { HomePage } from "../home/home";
 import { LoginPage } from "../login/login";
@@ -8,6 +8,7 @@ import {TabsPage} from "../tabs/tabs";
 import {User} from "../../models/user";
 import {Profile} from "../../models/profile";
 import {AngularFireDatabase} from "angularfire2/database";
+import {UsernameValidator} from "../../validators/username";
 
 
 @IonicPage()
@@ -20,39 +21,73 @@ export class RegisterPage {
   user = {} as User;
   profile = {} as Profile;
 
-  private registerGroup : FormGroup;
+  private registerFormGroup : FormGroup;
+  submitAttempt: boolean = false;
+
+  fname: AbstractControl;
+  username: AbstractControl;
+  email: AbstractControl;
+  password: AbstractControl;
+  phone: AbstractControl;
+  dob: AbstractControl;
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
               public alertCtrl: AlertController, private afAuth: AngularFireAuth,
               private afDatabase: AngularFireDatabase) {
-    this.registerGroup = this.formBuilder.group({
-      fullname: ['', Validators.required, Validators.maxLength(30)],
-      username: ['', Validators.required, Validators.maxLength(15)],
-      email: ['', Validators.email, Validators.maxLength(35)],
-      password: ['', Validators.required, Validators.minLength(6)],
-      confirmPass: ['', Validators.required, Validators.minLength(6)],
-      phone: ['', Validators.required],
-      date: ['', Validators.required],
+    this.registerFormGroup = this.formBuilder.group({
+      fname: ['', Validators.compose([ Validators.required, Validators.maxLength(30), Validators.pattern('[a-zA-Z]*')])],
+      username: ['', Validators.compose([ Validators.required, Validators.maxLength(15), Validators.pattern('[a-zA-Z0-9]*')])],
+      email: ['', Validators.compose([ Validators.required, Validators.email, Validators.maxLength(35)])],
+      password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
+      phone: ['', Validators.compose([Validators.required, Validators.pattern('([0-9]{3})\\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})')])],
+      dob: ['', Validators.required],
     });
+
+    this.fname = this.registerFormGroup.controls['fname'];
+    this.username = this.registerFormGroup.controls['username'];
+    this.email = this.registerFormGroup.controls['email'];
+    this.password = this.registerFormGroup.controls['password'];
+    this.phone = this.registerFormGroup.controls['phone'];
+    this.dob = this.registerFormGroup.controls['dob'];
+
   }
 
   async register(user: User, profile: Profile) {
-    try {
-      const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
 
-      console.log(result);
+    this.submitAttempt = true;
 
-      this.afAuth.authState.take(1).subscribe(auth => {
-        this.afDatabase.list(`profile/${auth.uid}`).push(profile)
-          .then(() => this.navCtrl.push(TabsPage));
-      });
+    if(!this.registerFormGroup.valid){
+      this.showAlert();
     }
-    catch (e){
-      console.error(e);
+    else {
+      console.log("success!")
+      try {
+        const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
+
+        console.log(result);
+
+        this.afAuth.authState.take(1).subscribe(auth => {
+          this.afDatabase.list(`profile/${auth.uid}`).push(profile)
+            .then(() => this.navCtrl.push(TabsPage));
+        });
+      }
+      catch (e){
+        console.error(e);
+      }
     }
   }
 
   showLogin(){
     this.navCtrl.push(LoginPage);
+  }
+
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Error!',
+      subTitle: 'Make sure missing information is filled. ',
+      buttons: ['OK']
+    });
+    alert.present();
   }
 }

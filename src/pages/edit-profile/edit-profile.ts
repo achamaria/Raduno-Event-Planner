@@ -7,7 +7,7 @@ import {Profile} from "../../models/profile";
 import firebase from "firebase";
 import {ProfilePage} from "../profile/profile";
 import {Camera, File} from "ionic-native"
-import {FirebaseObjectObservable} from "angularfire2/database-deprecated";
+//import {FirebaseObjectObservable} from "angularfire2/database";
 declare var window: any;
 
 /**

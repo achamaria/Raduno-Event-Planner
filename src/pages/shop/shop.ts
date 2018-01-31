@@ -29,7 +29,7 @@ export class ShopPage {
     console.log('ionViewDidLoad ShopPage');
   }
 
-  search(query){
+  search(){
     this.getProducts();
   }
 

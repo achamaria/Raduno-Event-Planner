@@ -7,31 +7,37 @@
 <ion-content padding id="register">
   <img src="assets/imgs/logo.png" class="navLogo" />
   <h1> Account Registration</h1>
-  <form>
-    <ion-item>
+  <form [formGroup]="registerFormGroup">
+    <ion-item pa>
       <ion-label>Full Name :</ion-label>
-      <ion-input name="name" [(ngModel)]="profile.name" type="text"></ion-input>
+      <ion-input formControlName="fname" [(ngModel)]="profile.name" type="text"></ion-input>
     </ion-item>
+    <div class="danger" *ngIf="!fname.valid && fname.touched">*Valid full name is required and max 30 characters long</div>
     <ion-item>
       <ion-label>Username :</ion-label>
-      <ion-input name="username" [(ngModel)]="profile.username"  type="text"></ion-input>
+      <ion-input formControlName="username" [(ngModel)]="profile.username"  type="text"></ion-input>
     </ion-item>
+    <div  class="danger" *ngIf="!username.valid && username.touched">*Valid  username is required and max 15 character long</div>
     <ion-item>
       <ion-label>Email :</ion-label>
-      <ion-input name="email" type="email" [(ngModel)]="user.email"></ion-input>
+      <ion-input formControlName="email" type="email" [(ngModel)]="user.email"></ion-input>
     </ion-item>
+    <div  class="danger" *ngIf="!email.valid && email.touched">*Valid email is required and max 35 character long</div>
     <ion-item>
       <ion-label>Password :</ion-label>
-      <ion-input name="password" type="password" [(ngModel)]="user.password"></ion-input>
+      <ion-input formControlName="password" type="password" [(ngModel)]="user.password"></ion-input>
     </ion-item>
+    <div  class="danger" *ngIf="!password.valid && password.touched">*You must specify password between 6 to 15 characters long</div>
     <ion-item>
       <ion-label>Phone Number :</ion-label>
-      <ion-input name="phone" [(ngModel)]="profile.phone"  type="number"></ion-input>
+      <ion-input formControlName="phone" [(ngModel)]="profile.phone"  type="number"></ion-input>
     </ion-item>
+    <div  class="danger" *ngIf="!phone.valid && phone.touched">*Phone is required with valid phone format</div>
     <ion-item>
       <ion-label>Date of Birth :</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY"  name="dob" [(ngModel)]="profile.dob"></ion-datetime>
+      <ion-datetime displayFormat="MM/DD/YYYY"  formControlName="dob" [(ngModel)]="profile.dob"></ion-datetime>
     </ion-item>
+    <div  class="danger" *ngIf="!dob.valid && dob.touched">*Valid date is required</div>
     <br>
     <div class="registerBtn">
       <button ion-button color="dark" (click)="register(user, profile)" type="submit">Register</button>
