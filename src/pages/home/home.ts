@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams, ToastController} from 'ionic-angular';
-import { TabsPage } from '../tabs/tabs';
+import {MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {AngularFireAuth} from "angularfire2/auth";
 import {LoginPage} from "../login/login";
 
@@ -11,8 +10,9 @@ import {LoginPage} from "../login/login";
 export class HomePage {
 
   constructor(public navParams: NavParams, private afAuth: AngularFireAuth, public navCtrl: NavController,
-              private toast: ToastController) {
+              private toast: ToastController, public menu: MenuController) {
 
+    this.menu.enable(true);
   }
 
   ionViewDidLoad() {

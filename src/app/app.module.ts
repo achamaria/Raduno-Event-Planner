@@ -33,6 +33,7 @@ import { ShopProvider } from '../providers/shop/shop';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {Ionic2RatingModule} from "ionic2-rating";
 import { FaqProvider } from '../providers/faq/faq';
+import {Camera} from "@ionic-native/camera";
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import { FaqProvider } from '../providers/faq/faq';
     ShopProvider,
     InAppBrowser,
     Ionic2RatingModule,
-    FaqProvider
+    FaqProvider,
+    Camera
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

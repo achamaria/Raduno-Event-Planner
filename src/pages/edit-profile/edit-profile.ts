@@ -6,8 +6,7 @@ import {User} from "firebase/app";
 import {Profile} from "../../models/profile";
 import firebase from "firebase";
 import {ProfilePage} from "../profile/profile";
-import {Camera, File} from "ionic-native"
-import {FirebaseObjectObservable} from "angularfire2/database-deprecated";
+import {Camera} from "@ionic-native/camera";
 declare var window: any;
 
 /**
@@ -37,15 +36,9 @@ export class EditProfilePage {
   picurl: any;
   mypicref: any;
 
-  public options = {
-    sourceType:Camera.PictureSourceType.SAVEDPHOTOALBUM,
-    mediaType:Camera.MediaType.ALLMEDIA,
-    destinationType:Camera.DestinationType.FILE_URI
-  }
-
   public Fbref:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private afAuth:AngularFireAuth, private afDatabase :AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afAuth:AngularFireAuth, private afDatabase :AngularFireDatabase, public camera :Camera) {
 
     this.mypicref = firebase.storage().ref('/');
 
@@ -117,7 +110,11 @@ export class EditProfilePage {
   }
 
   getMedia(){
-    Camera.getPicture(this.options).then(fileuri=>{
+    this.camera.getPicture({
+      sourceType:this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+      mediaType:this.camera.MediaType.ALLMEDIA,
+      destinationType:this.camera.DestinationType.FILE_URI
+    }).then(fileuri=>{
       window.resolveLocalFileSystemURL("file://"+fileuri, EF=>{
         EF.file(file=>{
           const FR = new FileReader()
@@ -139,11 +136,11 @@ export class EditProfilePage {
   }
 
   takePic(){
-    Camera.getPicture({
+    this.camera.getPicture({
       quality:100,
-      destinationType:Camera.DestinationType.DATA_URL,
-      sourceType:Camera.PictureSourceType.CAMERA,
-      encodingType:Camera.EncodingType.PNG,
+      destinationType:this.camera.DestinationType.DATA_URL,
+      sourceType:this.camera.PictureSourceType.CAMERA,
+      encodingType:this.camera.EncodingType.PNG,
       saveToPhotoAlbum:true
     }).then(imagedata=>{
       this.picdata = imagedata;

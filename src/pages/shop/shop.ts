@@ -50,9 +50,7 @@ export class ShopPage {
     }
 
     // Opening a URL and returning an InAppBrowserObject
-    const browser = this.inAppBrowser.create(url, '_self', options);
-
-    // Inject scripts, css and more with browser.X
+    this.inAppBrowser.create(url, '_self', options);
   }
 
 }
