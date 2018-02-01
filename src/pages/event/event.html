@@ -1,5 +1,28 @@
 <header pageTitle="Event"></header>
 
-<ion-content padding>
-
+<ion-content padding><br><br><br>
+  <form>
+    <ion-item text-center>
+      <ion-input type="text" placeholder="Event Title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Date and Time</ion-label>
+      <ion-datetime displayFormat="MMM DD, YYYY HH:mm"></ion-datetime>
+    </ion-item>
+    <ion-item text-center>
+      <ion-input type="text" placeholder="Location"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Contacts</ion-label>
+      <ion-select>
+        <ion-option></ion-option>
+      </ion-select>
+    </ion-item>
+    <ion-item text-center>
+      <ion-input type="text" placeholder="Estimated Budget"></ion-input>
+    </ion-item>
+    <div text-center>
+      <button ion-button (click)="gotoGreetingPage()">Next</button>
+    </div>
+  </form>
 </ion-content>

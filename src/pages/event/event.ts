@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {GreetingPage} from "../greeting/greeting";
 
 /**
  * Generated class for the EventPage page.
@@ -20,6 +21,10 @@ export class EventPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventPage');
+  }
+
+  gotoGreetingPage(){
+    this.navCtrl.push(GreetingPage);
   }
 
 }

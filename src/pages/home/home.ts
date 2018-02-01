@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {AngularFireAuth} from "angularfire2/auth";
 import {LoginPage} from "../login/login";
+import {EventPage} from "../event/event";
 
 @Component({
   selector: 'page-home',
@@ -31,6 +32,10 @@ export class HomePage {
         this.navCtrl.setRoot(LoginPage);
       }
     });
+  }
+
+  gotoEventPage(){
+    this.navCtrl.setRoot(EventPage);
   }
 
 
