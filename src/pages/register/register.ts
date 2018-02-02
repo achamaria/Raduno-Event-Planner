@@ -23,12 +23,12 @@ export class RegisterPage {
 
   private registerFormGroup : FormGroup;
 
-  fname: AbstractControl;
-  username: AbstractControl;
-  email: AbstractControl;
-  password: AbstractControl;
-  phone: AbstractControl;
-  dob: AbstractControl;
+  fname: any;
+  username: any;
+  email: any;
+  password: any;
+  phone: any;
+  dob: any;
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
@@ -42,13 +42,6 @@ export class RegisterPage {
       phone: ['', Validators.compose([Validators.required, Validators.pattern('([0-9]{3})\\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})')])],
       dob: ['', Validators.required],
     });
-
-    this.fname = this.registerFormGroup.controls['fname'];
-    this.username = this.registerFormGroup.controls['username'];
-    this.email = this.registerFormGroup.controls['email'];
-    this.password = this.registerFormGroup.controls['password'];
-    this.phone = this.registerFormGroup.controls['phone'];
-    this.dob = this.registerFormGroup.controls['dob'];
 
   }
 

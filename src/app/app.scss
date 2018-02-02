@@ -74,8 +74,14 @@ ion-header{
   }
 }
 
-#profile, #editProfile{
-  margin-top: 50px;
+#profile, #editProfile, #event{
+  margin-top: 40px;
+
+  .danger{
+    color: red;
+    padding-left: 5%;
+
+  }
 }
 
 

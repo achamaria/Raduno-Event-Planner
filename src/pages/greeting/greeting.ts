@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angular';
 
 /**
  * Generated class for the GreetingPage page.
@@ -15,7 +15,12 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class GreetingPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private toast: ToastController) {
+
+    this.toast.create({
+      message: `Event is successfully created.`,
+      duration: 3000,
+    }).present();
   }
 
   ionViewDidLoad() {

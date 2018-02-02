@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { NgModule } from '@angular/core';
+import { IonicApp, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -34,6 +34,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import {Ionic2RatingModule} from "ionic2-rating";
 import { FaqProvider } from '../providers/faq/faq';
 import {Camera} from "@ionic-native/camera";
+import {Contact} from "@ionic-native/contacts";
+import {Cordova} from "@ionic-native/core";
 
 
 @NgModule({
@@ -94,7 +96,8 @@ import {Camera} from "@ionic-native/camera";
     InAppBrowser,
     Ionic2RatingModule,
     FaqProvider,
-    Camera
+    Camera,
+    Contact
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

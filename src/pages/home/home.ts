@@ -35,7 +35,7 @@ export class HomePage {
   }
 
   gotoEventPage(){
-    this.navCtrl.setRoot(EventPage);
+    this.navCtrl.push(EventPage);
   }
 
 
