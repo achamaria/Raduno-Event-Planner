@@ -24,7 +24,7 @@ export interface PageInterface {
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = LoginPage;
+  rootPage:any = TabsPage;
 
   //pages: Array<{title: string, pageName: any, component: any, icon: string}>;
 

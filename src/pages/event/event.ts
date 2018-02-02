@@ -28,11 +28,11 @@ export class EventPage {
   location: any;
   budget?: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
-              public alertCtrl: AlertController, private afAuth: AngularFireAuth,  private afDatabase: AngularFireDatabase) {
+    constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
+      public alertCtrl: AlertController, private afAuth: AngularFireAuth,  private afDatabase: AngularFireDatabase) {
 
 
-    // adds new contact in the phone contacts
+      // adds new contact in the phone contacts
     // this.friends.name = new ContactName(null, 'Smith', 'John');
     // this.friends.phoneNumbers = [new ContactField('mobile', '6471234567')];
     // this.friends.save().then(
@@ -88,9 +88,17 @@ export class EventPage {
     let self = this;
     if(self.contactList.length < 10) {
       navigator.contacts.pickContact(function (contact) {
-        console.log(self.contactList.length);
-
-        self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value']});
+        console.log("Sdfasd" + self.contactList.length);
+        var obj = {"name": contact.displayName, "phone": contact.phoneNumbers[0]['value']};
+        console.log("sdfasd" + self.contactList.indexOf(obj));
+        console.log("data" + JSON.stringify(self.contactList[0]));
+        console.log("data1" + JSON.stringify(obj));
+        if(self.containsObject(obj, self.contactList)){
+          console.log("Duplicate entry");
+        }else{
+          self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value']});
+        }
+        console.log(self.contactList);
       }, function (err) {
         console.log('Error: ' + err);
       });
@@ -112,6 +120,16 @@ export class EventPage {
     if(index > -1){
       this.contactList.splice(index, 1);
     }
+  }
+
+  containsObject(obj, list) {
+    var i;
+    for (i = 0; i < list.length; i++) {
+      if (JSON.stringify(list[i]) === JSON.stringify(obj)) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }
