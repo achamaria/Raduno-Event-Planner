@@ -93,8 +93,13 @@ export class EventPage {
         console.log("sdfasd" + self.contactList.indexOf(obj));
         console.log("data" + JSON.stringify(self.contactList[0]));
         console.log("data1" + JSON.stringify(obj));
-        if(self.containsObject(obj, self.contactList)){
-          console.log("Duplicate entry");
+        if(self.checkDuplicateContacts(obj, self.contactList)){
+          let alert = self.alertCtrl.create({
+            title: 'Warning!',
+            subTitle: 'You can not add duplicates invitees ',
+            buttons: ['OK']
+          });
+          alert.present();
         }else{
           self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value']});
         }
@@ -122,7 +127,7 @@ export class EventPage {
     }
   }
 
-  containsObject(obj, list) {
+  checkDuplicateContacts(obj, list) {
     var i;
     for (i = 0; i < list.length; i++) {
       if (JSON.stringify(list[i]) === JSON.stringify(obj)) {
