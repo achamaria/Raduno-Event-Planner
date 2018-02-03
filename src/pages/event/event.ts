@@ -31,15 +31,6 @@ export class EventPage {
     constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
       public alertCtrl: AlertController, private afAuth: AngularFireAuth,  private afDatabase: AngularFireDatabase) {
 
-
-      // adds new contact in the phone contacts
-    // this.friends.name = new ContactName(null, 'Smith', 'John');
-    // this.friends.phoneNumbers = [new ContactField('mobile', '6471234567')];
-    // this.friends.save().then(
-    //   () => console.log('Contact saved!', this.friends),
-    //   (error: any) => console.error('Error saving contact.', error)
-    // );
-
     this.EventFormGroup = this.formBuilder.group({
       title: ['', Validators.compose([ Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('[a-zA-Z]*')])],
       date: ['', Validators.compose([ Validators.required])],
@@ -63,12 +54,12 @@ export class EventPage {
     else {
       if(this.budget == undefined)
       {
-        this.budget = " ";
+        this.budget = "";
         console.log(this.budget);
       }
 
       this.afAuth.authState.take(1).subscribe(auth => {
-        this.afDatabase.list(`event/${auth.uid}/`)
+        this.afDatabase.list(`event/${auth.uid}`)
           .push({"title": this.title, "date": this.date, "location": this.location, "budget": this.budget, "invitees": this.contactList})
           .then(() => this.navCtrl.push(GreetingPage));
       });
@@ -101,7 +92,7 @@ export class EventPage {
           });
           alert.present();
         }else{
-          self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value']});
+          self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'], "accepted": 'pending'});
         }
         console.log(self.contactList);
       }, function (err) {
