@@ -4,7 +4,7 @@ import {GreetingPage} from "../greeting/greeting";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireDatabase} from "angularfire2/database";
 import {AngularFireAuth} from "angularfire2/auth";
-import moment from "moment";
+//import moment from "moment";
 
 /**
  * Generated class for the EventPage page.
@@ -25,7 +25,7 @@ export class EventPage {
   private EventFormGroup : FormGroup;
 
   title: any;
-  date: any = new Date();
+  date: any;
   location: any;
   budget?: any;
   currDate: any = new Date();
@@ -34,14 +34,13 @@ export class EventPage {
   key: string | null;
     constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
       public alertCtrl: AlertController, private afAuth: AngularFireAuth,  private afDatabase: AngularFireDatabase) {
-      this.date = moment().format("lll");
-    this.EventFormGroup = this.formBuilder.group({
+
+      this.EventFormGroup = this.formBuilder.group({
       title: ['', Validators.compose([ Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('[a-zA-Z]*')])],
       date: ['', Validators.compose([ Validators.required])],
       location: ['', Validators.compose([ Validators.required, Validators.maxLength(30)])],
       budget: [" "]
     });
-
   }
 
   ionViewDidLoad() {
@@ -83,11 +82,11 @@ export class EventPage {
               }
             }
 
-            // checks for the past date
-            if(newEventDate.toLocaleDateString() < new Date(this.currDate).toLocaleDateString()){
+            // checks for the past date and cuurent date
+            if(newEventDate.toLocaleDateString() <= new Date(this.currDate).toLocaleDateString()){
               let alert = this.alertCtrl.create({
                 title: 'Error!',
-                subTitle: 'You can not host an event in the past',
+                subTitle: 'You can not host an event in the past or today',
                 buttons: ['OK']
               });
               alert.present();
@@ -96,7 +95,7 @@ export class EventPage {
             // inserts new event to the database
             if(!flag && !pastDate){
               this.hostID = auth.uid;
-              this.date = moment().format("lll");
+              //this.date = moment().format('lll');
               console.log("this.date: " + this.date);
               this.key = this.afDatabase.list(`event`)
                 .push({"hostID":this.hostID, "title": this.title, "date": this.date, "location": this.location,
@@ -121,6 +120,7 @@ export class EventPage {
     alert.present();
   }
 
+  //imports contacts from user phone
   getContacts(){
     let self = this;
     if(self.contactList.length < 10) {

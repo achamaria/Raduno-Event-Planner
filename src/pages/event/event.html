@@ -9,7 +9,7 @@
     <div class="danger" *ngIf="!EventFormGroup.controls['title'].valid && EventFormGroup.controls['title'].touched">*Valid title is required and max 30 characters long</div>
     <ion-item>
       <ion-label>Date and Time: </ion-label>
-      <ion-datetime displayFormat="MMM DD, YYYYTh:mm A" min="2018" pickerFormat="MMM DD YY h:mm"  formControlName="date" [(ngModel)]="date"></ion-datetime>
+      <ion-datetime displayFormat="MMM DD, YYYYTh:mm A" min="2018" pickerFormat="MMM DD YY h:mm A"  formControlName="date" [(ngModel)]="date"></ion-datetime>
     </ion-item>
     <div class="danger" *ngIf="!EventFormGroup.controls['date'].valid && EventFormGroup.controls['date'].touched">*Date and time should not be empty</div>
     <ion-item text-center>
