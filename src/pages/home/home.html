@@ -1,10 +1,25 @@
 
 <header pageTitle="Dashboard"></header>
 <ion-content padding>
-  <ion-list>
-      <ion-item>
-
-      </ion-item>
+  <br><br><br>
+  <ion-list *ngFor="let pendingEvent of pendingEvents">
+    <ion-item>
+      <ion-thumbnail item-start>
+        <img src="assets/imgs/logo.png">
+      </ion-thumbnail>
+      <h2>{{ pendingEvent.title }}</h2>
+      <button ion-button default float-right>
+        View
+      </button>
+      <p>{{ pendingEvent.location }}</p>
+      <p>{{ pendingEvent.date }}</p>
+      <br>
+      <button ion-button default>
+        Accept
+      </button><button ion-button default  color="danger">
+        Decline
+      </button>
+    </ion-item>
   </ion-list>
   <ion-fab>
     <button ion-fab color="primary" (click)="gotoEventPage()">

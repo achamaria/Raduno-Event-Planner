@@ -10,6 +10,7 @@ import {SettingsPage} from "../pages/settings/settings";
 import {FeedbackPage} from "../pages/feedback/feedback";
 import {FAQsPage} from "../pages/fa-qs/fa-qs";
 import { TabsPage } from "../pages/tabs/tabs";
+import moment from 'moment';
 
 export interface PageInterface {
   title: string;
@@ -24,7 +25,7 @@ export interface PageInterface {
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = LoginPage;
+  rootPage:any = TabsPage;
 
   //pages: Array<{title: string, pageName: any, component: any, icon: string}>;
 
@@ -41,6 +42,7 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       statusBar.styleDefault();
+      moment.locale('en');
       splashScreen.hide();
     });
 

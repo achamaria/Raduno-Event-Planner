@@ -4,6 +4,7 @@ import {GreetingPage} from "../greeting/greeting";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireDatabase} from "angularfire2/database";
 import {AngularFireAuth} from "angularfire2/auth";
+import moment from "moment";
 
 /**
  * Generated class for the EventPage page.
@@ -27,10 +28,11 @@ export class EventPage {
   date: any;
   location: any;
   budget?: any;
-
+  hostID: any;
+  key: string | null;
     constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
       public alertCtrl: AlertController, private afAuth: AngularFireAuth,  private afDatabase: AngularFireDatabase) {
-
+      this.date = moment().format("lll");
     this.EventFormGroup = this.formBuilder.group({
       title: ['', Validators.compose([ Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('[a-zA-Z]*')])],
       date: ['', Validators.compose([ Validators.required])],
@@ -59,9 +61,16 @@ export class EventPage {
       }
 
       this.afAuth.authState.take(1).subscribe(auth => {
-        this.afDatabase.list(`event/${auth.uid}`)
-          .push({"title": this.title, "date": this.date, "location": this.location, "budget": this.budget, "invitees": this.contactList})
-          .then(() => this.navCtrl.push(GreetingPage));
+        this.hostID = auth.uid;
+        this.date = moment().format("lll");
+        console.log("this.date: " + this.date)
+        this.key = this.afDatabase.list(`event`)
+          .push({"hostID":this.hostID, "title": this.title, "date": this.date, "location": this.location,
+            "budget": this.budget, "invitees": this.contactList}).key;
+        console.log("new key: " + this.key);
+        this.afDatabase.database.ref(`event/${this.key}`).update({"key": this.key});
+         console.log("new key: " + this.key)
+        this.navCtrl.push(GreetingPage);
       });
     }
   }
@@ -80,7 +89,7 @@ export class EventPage {
     if(self.contactList.length < 10) {
       navigator.contacts.pickContact(function (contact) {
         console.log("Sdfasd" + self.contactList.length);
-        var obj = {"name": contact.displayName, "phone": contact.phoneNumbers[0]['value']};
+        var obj = {"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'], "accepted": "pending"};
         console.log("sdfasd" + self.contactList.indexOf(obj));
         console.log("data" + JSON.stringify(self.contactList[0]));
         console.log("data1" + JSON.stringify(obj));
@@ -92,7 +101,7 @@ export class EventPage {
           });
           alert.present();
         }else{
-          self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'], "accepted": 'pending'});
+          self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'], "accepted": "pending"});
         }
         console.log(self.contactList);
       }, function (err) {
