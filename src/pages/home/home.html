@@ -8,7 +8,7 @@
         <img src="assets/imgs/logo.png">
       </ion-thumbnail>
       <h2>{{ pendingEvent.title }}</h2>
-      <button ion-button default float-right>
+      <button ion-button default float-right (click)="viewEvent(pendingEvent.key)">
         View
       </button>
       <p>{{ pendingEvent.location }}</p>

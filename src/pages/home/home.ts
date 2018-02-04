@@ -6,6 +6,8 @@ import {AngularFireDatabase} from "angularfire2/database";
 import {AngularFireAuth} from "angularfire2/auth";
 import firebase from "firebase";
 import moment from "moment";
+import {FirebaseListObservable} from "angularfire2/database-deprecated";
+import {ViewEventPage} from "../view-event/view-event";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -83,6 +85,20 @@ export class HomePage {
 
   gotoEventPage(){
     this.navCtrl.push(EventPage);
+  }
+
+  viewEvent(key: string){
+    let viewEvent: any;
+    let tasks: FirebaseListObservable<any[]>;
+    viewEvent = this.afDatabase.list('/event/').valueChanges()
+      .subscribe(values=>{
+        values.map(value=>{
+          console.log(value);
+          if(value["key"] == key){
+            this.navCtrl.push(ViewEventPage,value);
+          }
+        });
+      });
   }
 
 }
