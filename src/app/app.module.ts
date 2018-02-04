@@ -36,6 +36,7 @@ import { FaqProvider } from '../providers/faq/faq';
 import {Camera} from "@ionic-native/camera";
 import {Contact} from "@ionic-native/contacts";
 import {Cordova} from "@ionic-native/core";
+import {ViewEventPage} from "../pages/view-event/view-event";
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import {Cordova} from "@ionic-native/core";
     SettingsPage,
     FeedbackPage,
     FAQsPage,
-    EditProfilePage
+    EditProfilePage,
+    ViewEventPage
   ],
   imports: [
     BrowserModule,
@@ -86,7 +88,8 @@ import {Cordova} from "@ionic-native/core";
     SettingsPage,
     FeedbackPage,
     FAQsPage,
-    EditProfilePage
+    EditProfilePage,
+    ViewEventPage
   ],
   providers: [
     StatusBar,
