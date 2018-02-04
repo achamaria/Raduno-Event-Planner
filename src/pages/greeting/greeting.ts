@@ -11,7 +11,7 @@ import {IonicPage, NavController, NavParams, ToastController} from 'ionic-angula
 @IonicPage()
 @Component({
   selector: 'page-greeting',
-  templateUrl: 'greeting.html',
+  templateUrl: 'greeting.html'
 })
 export class GreetingPage {
 

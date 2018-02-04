@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import {Nav, Platform} from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -9,6 +9,7 @@ import { ProfilePage } from "../pages/profile/profile";
 import {SettingsPage} from "../pages/settings/settings";
 import {FeedbackPage} from "../pages/feedback/feedback";
 import {FAQsPage} from "../pages/fa-qs/fa-qs";
+import {AngularFireAuth} from "angularfire2/auth";
 import { TabsPage } from "../pages/tabs/tabs";
 import moment from 'moment';
 
@@ -25,7 +26,7 @@ export interface PageInterface {
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
-  rootPage:any = TabsPage;
+  rootPage:any = LoginPage;
 
   //pages: Array<{title: string, pageName: any, component: any, icon: string}>;
 
@@ -36,7 +37,8 @@ export class MyApp {
     { title: 'FAQs', pageName: 'TabsPage', component: FAQsPage, index: 3, icon: "help" }
   ];
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
+              public afAuth: AngularFireAuth) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -48,7 +50,11 @@ export class MyApp {
 
   }
 
-
+  logout(){
+    this.afAuth.auth.signOut().then(() => {
+      this.nav.setRoot(LoginPage);
+    });
+  }
   openPage(page: PageInterface) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario// The active child nav is our Tabs Navigation

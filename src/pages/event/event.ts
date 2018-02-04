@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, DateTime, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {GreetingPage} from "../greeting/greeting";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireDatabase} from "angularfire2/database";
@@ -25,9 +25,11 @@ export class EventPage {
   private EventFormGroup : FormGroup;
 
   title: any;
-  date: any;
+  date: any = new Date();
   location: any;
   budget?: any;
+  currDate: any = new Date();
+
   hostID: any;
   key: string | null;
     constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
@@ -48,7 +50,7 @@ export class EventPage {
 
   gotoGreetingPage(){
 
-    console.log("length", this.contactList.length);
+    let newEventDate = new Date(this.date);
 
     if(!this.EventFormGroup.valid || this.contactList.length == 0){
       this.showAlert();
@@ -57,20 +59,55 @@ export class EventPage {
       if(this.budget == undefined)
       {
         this.budget = "";
-        console.log(this.budget);
       }
 
+      let flag = false;
+      let pastDate = false;
       this.afAuth.authState.take(1).subscribe(auth => {
-        this.hostID = auth.uid;
-        this.date = moment().format("lll");
-        console.log("this.date: " + this.date)
-        this.key = this.afDatabase.list(`event`)
-          .push({"hostID":this.hostID, "title": this.title, "date": this.date, "location": this.location,
-            "budget": this.budget, "invitees": this.contactList}).key;
-        console.log("new key: " + this.key);
-        this.afDatabase.database.ref(`event/${this.key}`).update({"key": this.key});
-         console.log("new key: " + this.key)
-        this.navCtrl.push(GreetingPage);
+        this.afDatabase.list(`event/${auth.uid}`).valueChanges()
+          .subscribe(eventDates=>{
+            for(var i=0; i < eventDates.length; i++){
+
+              let oldEventDate = new Date(eventDates[i]['date']);
+
+              // checks whether an event is created for given event date
+              if(oldEventDate.toLocaleDateString() == newEventDate.toLocaleDateString()){
+                let alert = this.alertCtrl.create({
+                  title: 'Error!',
+                  subTitle: 'You can not host more than one event on the same date',
+                  buttons: ['OK']
+                });
+                alert.present();
+                flag = true;
+                break;
+              }
+            }
+
+            // checks for the past date
+            if(newEventDate.toLocaleDateString() < new Date(this.currDate).toLocaleDateString()){
+              let alert = this.alertCtrl.create({
+                title: 'Error!',
+                subTitle: 'You can not host an event in the past',
+                buttons: ['OK']
+              });
+              alert.present();
+              pastDate = true;
+            }
+            // inserts new event to the database
+            if(!flag && !pastDate){
+              this.hostID = auth.uid;
+              this.date = moment().format("lll");
+              console.log("this.date: " + this.date);
+              this.key = this.afDatabase.list(`event`)
+                .push({"hostID":this.hostID, "title": this.title, "date": this.date, "location": this.location,
+                  "budget": this.budget, "invitees": this.contactList}).key;
+              console.log("new key: " + this.key);
+              this.afDatabase.database.ref(`event/${this.key}`).update({"key": this.key});
+              console.log("new key: " + this.key)
+              this.navCtrl.push(GreetingPage);
+            }
+          });
+
       });
     }
   }
