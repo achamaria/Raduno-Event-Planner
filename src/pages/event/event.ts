@@ -4,7 +4,7 @@ import {GreetingPage} from "../greeting/greeting";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireDatabase} from "angularfire2/database";
 import {AngularFireAuth} from "angularfire2/auth";
-//import moment from "moment";
+import moment from "moment";
 
 /**
  * Generated class for the EventPage page.
@@ -95,7 +95,7 @@ export class EventPage {
             // inserts new event to the database
             if(!flag && !pastDate){
               this.hostID = auth.uid;
-              //this.date = moment().format('lll');
+              this.date = moment(this.date).format('lll');
               console.log("this.date: " + this.date);
               this.key = this.afDatabase.list(`event`)
                 .push({"hostID":this.hostID, "title": this.title, "date": this.date, "location": this.location,

@@ -8,6 +8,7 @@ import firebase from "firebase";
 import moment from "moment";
 import {FirebaseListObservable} from "angularfire2/database-deprecated";
 import {ViewEventPage} from "../view-event/view-event";
+import {TabsPage} from "../tabs/tabs";
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -56,24 +57,15 @@ export class HomePage {
       this.uId = data.uid;
       this.afDatabase.list('/event/').valueChanges()
         .subscribe(eventSnapshots=>{
-          // console.log(eventSnapshots);
           eventSnapshots.map(event=>{
-            // console.log(event);
             invitees = event["invitees"];
             invitees.forEach(invitee=>{
-              // console.log(invitee["phone"]);
               if(invitee["phone"]==this.profile["phone"]){
                 if(invitee["accepted"]=="pending"){
-                  // console.log("match found");
-                  // event["date"] = moment(event["date"]).format('lll');
-                  // console.log(moment(event["date"]).format('lll'));
                   this.pendingEvents.push(event);
-                  console.log("Pending Events");
-                  console.log(this.pendingEvents);
                 }
               }else{
                 if(invitee["accepted"]=="true"){
-
                   this.acceptedEvents.push(event);
                 }
               }
@@ -88,15 +80,54 @@ export class HomePage {
   }
 
   viewEvent(key: string){
-    let viewEvent: any;
-    let tasks: FirebaseListObservable<any[]>;
-    viewEvent = this.afDatabase.list('/event/').valueChanges()
+    this.afDatabase.list('/event/').valueChanges()
       .subscribe(values=>{
         values.map(value=>{
-          console.log(value);
           if(value["key"] == key){
-            this.navCtrl.push(ViewEventPage,value);
+            this.navCtrl.push(ViewEventPage,{viewEvent : JSON.stringify(value)});
           }
+        });
+      });
+  }
+
+  acceptInvitation(key: string){
+    let invitees: FirebaseListObservable<any>;
+    this.afDatabase.list('/event/').valueChanges()
+      .subscribe(eventSnapshots=>{
+        eventSnapshots.map(event=>{
+          invitees = event["invitees"];
+          invitees.forEach(invitee=>{
+            if(invitee["phone"]==this.profile["phone"]){
+              if(invitee["accepted"]=="pending"){
+                invitee["accepted"] = "accepted";
+                console.log("main data");
+                console.log(invitees);
+                this.afDatabase.database.ref(`event/${key}`).update({"invitees": invitees});
+                this.navCtrl.setRoot(TabsPage);
+              }
+            }
+          })
+        });
+      });
+  }
+
+  declineInvitation(key: string){
+    let invitees: FirebaseListObservable<any>;
+    this.afDatabase.list('/event/').valueChanges()
+      .subscribe(eventSnapshots=>{
+        eventSnapshots.map(event=>{
+          invitees = event["invitees"];
+          invitees.forEach(invitee=>{
+            if(invitee["phone"]==this.profile["phone"]){
+              if(invitee["accepted"]=="pending"){
+                invitee["accepted"] = "declined";
+                console.log("main data");
+                console.log(invitees);
+                this.afDatabase.database.ref(`event/${key}`).update({"invitees": invitees});
+                this.navCtrl.setRoot(TabsPage);
+              }
+            }
+          })
         });
       });
   }
