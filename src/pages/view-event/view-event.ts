@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AngularFireDatabase} from "angularfire2/database";
 
 /**
  * Generated class for the ViewEventPage page.
@@ -15,7 +16,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ViewEventPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  currEvent: any = [];
+  hostUser: any = {};
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afDatabase :AngularFireDatabase) {
+    this.currEvent = JSON.parse(navParams.get("viewEvent"));
+
+    this.afDatabase.list('/profile/' + this.currEvent["hostID"]).valueChanges()
+      .subscribe(values=>{
+        this.hostUser = values[0];
+       });
   }
 
   ionViewDidLoad() {
