@@ -1,16 +1,17 @@
 <header pageTitle="Greeting"></header>
 
-<ion-content padding id="greeting">
-
-  <canvas id="canvas"></canvas>
-
-  <div id="filters">
-
+<ion-content id="greeting" padding>
+  <div>
+    <ion-select [(ngModel)]="selectedFontFamily" (ngModelChange)="getSelectedFontFamily()">
+      <ion-option  selected>Select</ion-option>
+      <ion-option [value]="item" *ngFor="let item of fontFamily">{{item}}</ion-option>
+    </ion-select>
   </div>
-
-  <script type="text/javascript">
-
-
-  </script>
+  <div fxLayout="row">
+    <canvas id="canvas" width="300" height="250" style="border: 1px solid #ccc"></canvas>
+  </div>
+  <button ion-button  color="light" (click)="addText()">T</button>
+  <button ion-button color="light" ><ion-icon name="md-images"></ion-icon></button>
 
 </ion-content>
+
