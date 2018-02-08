@@ -1,5 +1,13 @@
 <header pageTitle="Budget"></header>
 
 <ion-content padding>
-
+  <br><br><br>
+  {{hostedEvents}}
+  <ion-item *ngFor="let e of hostedEvents">
+    {{e["title"]}}
+    <ion-label>Events</ion-label>
+    <!--<ion-select [(ngModel)]="selectedEvent">-->
+      <!--<ion-option *ngIf="e.budget > 0" value="f">{{e["title"]}}</ion-option>-->
+    <!--</ion-select>-->
+  </ion-item>
 </ion-content>
