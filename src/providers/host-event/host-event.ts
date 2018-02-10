@@ -2,7 +2,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
-
+import firebase from "firebase";
 @Injectable()
 export class HostEventProvider {
 
@@ -10,10 +10,9 @@ export class HostEventProvider {
 
   constructor(public http: HttpClient, private afAuth: AngularFireAuth,  private afDatabase: AngularFireDatabase) {
     console.log('Hello HostEventProvider Provider');
-
   }
 
-  getHostedEvents(){
+  getHostedEventsWithBudget(){
     let hostedEvents: any = [];
 
     this.afAuth.authState.take(1).subscribe(auth => {
@@ -22,7 +21,7 @@ export class HostEventProvider {
         this.afDatabase.list('/event/').valueChanges()
           .subscribe(eventSnapshots=>{
             eventSnapshots.map(event=>{
-              if(event["hostID"]==this.currUser.uid){
+              if(event["hostID"]==this.currUser.uid && event["budget"] > 0){
                 hostedEvents.push(event);
               }
             });
@@ -31,5 +30,18 @@ export class HostEventProvider {
     });
     return hostedEvents;
   }
+
+  // getEventDetail(key:any){
+  //   this.afDatabase.list('/event/').valueChanges()
+  //     .subscribe(eventSnapshots=>{
+  //       console.log(eventSnapshots);
+  //       eventSnapshots.map(event=>{
+  //       });
+  //       if(event["key"]==key){
+  //         console.log(event);
+  //         return event;
+  //       }
+  //     });
+  // }
 
 }

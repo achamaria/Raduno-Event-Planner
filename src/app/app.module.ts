@@ -38,6 +38,7 @@ import {Contact} from "@ionic-native/contacts";
 import {Cordova} from "@ionic-native/core";
 import {ViewEventPage} from "../pages/view-event/view-event";
 import { HostEventProvider } from '../providers/host-event/host-event';
+import {AddExpensePage} from "../pages/add-expense/add-expense";
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { HostEventProvider } from '../providers/host-event/host-event';
     FeedbackPage,
     FAQsPage,
     EditProfilePage,
-    ViewEventPage
+    ViewEventPage,
+    AddExpensePage
   ],
   imports: [
     BrowserModule,
@@ -90,7 +92,8 @@ import { HostEventProvider } from '../providers/host-event/host-event';
     FeedbackPage,
     FAQsPage,
     EditProfilePage,
-    ViewEventPage
+    ViewEventPage,
+    AddExpensePage
   ],
   providers: [
     StatusBar,
