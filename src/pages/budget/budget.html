@@ -5,12 +5,19 @@
   <ng-template #content>
     No hosted events with budget
   </ng-template>
-  <ion-item *ngIf="hostedEvents.length>0; else content">
+
+  <ion-item *ngIf="hostedEvents; else content">
     <ion-select  [(ngModel)]="selectedEventKey" (ngModelChange)="selectEventForBudget()">
       <ion-option selected disabled>No event selected</ion-option>
       <div *ngFor="let ev of hostedEvents">
-        <ion-option [value]="ev.key">{{ev["title"]}}</ion-option>
+        <div *ngIf="selectedEvent.key == ev.key; else unselectedOption">
+          <ion-option [value]="ev.key" selected>{{ev["title"]}}</ion-option>
+        </div>
+        <ng-template #unselectedOption>
+          <ion-option [value]="ev.key">{{ev["title"]}}</ion-option>
+        </ng-template>
       </div>
+
     </ion-select>
   </ion-item>
   <ion-grid *ngIf="selectedEvent.budget">
@@ -19,11 +26,33 @@
         Total Budget:
       </ion-col>
       <ion-col col-4>
-        ${{selectedEvent["budget"]}}
+          ${{selectedEvent["budget"]}}
       </ion-col>
     </ion-row>
   </ion-grid>
-  <ion-fab>
+  <ion-grid *ngIf="selectedEventExpenses.length > 0">
+    <div *ngFor="let expense of selectedEventExpenses">
+      <ion-row>
+        <ion-col col-8>
+          {{expense.description}}
+        </ion-col>
+        <ion-col col-4>
+          - ${{expense.amount}}
+        </ion-col>
+      </ion-row>
+    </div>
+  </ion-grid>
+  <ion-grid *ngIf="remainingBudget || remainingBudget==0">
+    <ion-row>
+      <ion-col col-8>
+        Remaining Budget
+      </ion-col>
+      <ion-col col-4>
+        = ${{remainingBudget}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-fab  *ngIf="selectedEvent.budget">
     <button ion-fab color="primary" (click)="presentAddExpenseModal()">
       <ion-icon name="add"></ion-icon>
     </button>

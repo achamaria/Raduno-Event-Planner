@@ -1,11 +1,12 @@
 <header pageTitle="Chat"></header>
 <ion-content padding>
   <br><br><br>
-  <ion-item>
-    <ion-label>Gender</ion-label>
-    <ion-select [(ngModel)]="eventList">
-      <ion-option value="f">Female</ion-option>
-      <ion-option value="m">Male</ion-option>
+  <ion-item *ngIf="hostedEvents.length>0; else content">
+    <ion-select  [(ngModel)]="selectedEventKey" (ngModelChange)="selectEventForBudget()">
+      <ion-option selected disabled>No event selected</ion-option>
+      <div *ngFor="let ev of hostedEvents">
+        <ion-option [value]="ev.key">{{ev["title"]}}</ion-option>
+      </div>
     </ion-select>
   </ion-item>
 </ion-content>

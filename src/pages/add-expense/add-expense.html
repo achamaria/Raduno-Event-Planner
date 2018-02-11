@@ -9,8 +9,7 @@
 
 </ion-header>
 
-<ion-content padding>
-  <h1 text-center>Add New Expense</h1>
+<ion-content padding text-center="">
     <ion-item>
       <ion-label>Amount</ion-label>
       <ion-input type="text" [(ngModel)]="expenseDetail.amount" name="title"></ion-input>
@@ -23,6 +22,7 @@
       <ion-label>Date and Time: </ion-label>
       <ion-datetime displayFormat="MMM DD, YYYYTh:mm A" min="2018" pickerFormat="MMM DD YY h:mm A" [(ngModel)]="expenseDetail.date"></ion-datetime>
     </ion-item>
+  <br>
     <button ion-button type="submit" (click)="addExpense()">Add Expense</button>
 </ion-content>
 

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
 import {TabsPage} from "../tabs/tabs";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
@@ -24,10 +24,14 @@ export class AddExpensePage {
     "amount": "",
     "description": "",
     "date" : ""
-  }
-  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,  private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase) {
+  };
+
+  remainingBudget: any;
+  constructor(public navCtrl: NavController, public navParams: NavParams, public viewCtrl: ViewController,
+              private afAuth: AngularFireAuth, private afDatabase: AngularFireDatabase,
+              public alertCtrl: AlertController) {
    this.event = navParams.get('event');
-    console.log(this.event);
+   this.remainingBudget = navParams.get('remainingBudget');
   }
 
   ionViewDidLoad() {
@@ -35,13 +39,25 @@ export class AddExpensePage {
   }
 
   addExpense(){
-    this.afDatabase.list(`event/` + this.event["key"] + "/expense/")
-      .push(this.expenseDetail)
-      .then(() => this.closeModal());
+    var sum = 0;
+    if(parseInt(this.remainingBudget) - parseInt(this.expenseDetail.amount) >= 0){
+      this.afDatabase.list(`event/` + this.event["key"] + "/expense/")
+        .push(this.expenseDetail)
+        .then(() => this.closeModal());
+    }else{
+      console.log("helloo" + this.remainingBudget);
+      let alertEmpty = this.alertCtrl.create({
+        title: 'Warning!',
+        subTitle: 'Your cannot add expense more than your remaining budget which is ' + this.remainingBudget,
+        buttons: ['OK']
+      });
+      alertEmpty.present();
+    }
   }
 
   closeModal(){
-    this.viewCtrl.dismiss();
+    // this.navCtrl.setRoot(TabsPage, {selectedEvent: this.event});
+    this.viewCtrl.dismiss({selectedEvent: this.event});
   }
 
 }
