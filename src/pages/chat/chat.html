@@ -2,17 +2,17 @@
 <ion-content padding>
   <br><br><br>
   <ion-item>
-    <ion-label>Gender</ion-label>
-    <ion-select [(ngModel)]="eventList">
-      <ion-option value="f">Female</ion-option>
-      <ion-option value="m">Male</ion-option>
+    <ion-label>Event Group</ion-label>
+    <ion-select>
+      <ion-option value="f">Event 1</ion-option>
+      <ion-option value="m">Event 2</ion-option>
     </ion-select>
   </ion-item>
 </ion-content>
 
 <ion-footer>
-    <ion-input type="text" [(ngModel)]="message" placeholder="Type here..."></ion-input>
-    <button ion-button icon-only (click)="sendMessage()">
+    <ion-input type="text" placeholder="Type here..."></ion-input>
+    <button ion-button icon-only>
       <ion-icon name="send"></ion-icon>
     </button>
 </ion-footer>

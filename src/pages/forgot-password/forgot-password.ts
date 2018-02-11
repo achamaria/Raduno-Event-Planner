@@ -39,11 +39,12 @@ export class ForgotPasswordPage {
   }
 
   showLogin(){
-    if(this.forgotGroup.valid)
-      this.navCtrl.push(LoginPage);
-    else {
-      this.showAlert();
-    }
+    // if(this.forgotGroup.valid)
+    //   this.navCtrl.push(LoginPage);
+    // else {
+    //   this.showAlert();
+    // }
+    this.navCtrl.push(LoginPage);
   }
 
   showAlert() {
