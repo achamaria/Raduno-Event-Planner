@@ -37,6 +37,8 @@ import {Camera} from "@ionic-native/camera";
 import {Contact} from "@ionic-native/contacts";
 import {Cordova} from "@ionic-native/core";
 import {ViewEventPage} from "../pages/view-event/view-event";
+import { HostEventProvider } from '../providers/host-event/host-event';
+import {AddExpensePage} from "../pages/add-expense/add-expense";
 
 
 @NgModule({
@@ -58,7 +60,8 @@ import {ViewEventPage} from "../pages/view-event/view-event";
     FeedbackPage,
     FAQsPage,
     EditProfilePage,
-    ViewEventPage
+    ViewEventPage,
+    AddExpensePage
   ],
   imports: [
     BrowserModule,
@@ -89,7 +92,8 @@ import {ViewEventPage} from "../pages/view-event/view-event";
     FeedbackPage,
     FAQsPage,
     EditProfilePage,
-    ViewEventPage
+    ViewEventPage,
+    AddExpensePage
   ],
   providers: [
     StatusBar,
@@ -100,7 +104,8 @@ import {ViewEventPage} from "../pages/view-event/view-event";
     Ionic2RatingModule,
     FaqProvider,
     Camera,
-    Contact
+    Contact,
+    HostEventProvider
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
