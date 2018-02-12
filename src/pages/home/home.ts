@@ -100,13 +100,14 @@ export class HomePage {
             if(invitee["phone"]==this.profile["phone"]){
               if(invitee["accepted"]=="pending"){
                 invitee["accepted"] = "accepted";
+                invitee["uid"] = this.uId.toString();
                 console.log("main data");
                 console.log(invitees);
                 this.afDatabase.database.ref(`event/${key}`).update({"invitees": invitees});
                 this.navCtrl.setRoot(TabsPage);
               }
             }
-          })
+          });
         });
       });
   }
