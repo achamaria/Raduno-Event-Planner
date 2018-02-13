@@ -7,7 +7,7 @@ import firebase from "firebase";
 export class HostEventProvider {
 
   currUser: any;
-
+  profile: any;
   constructor(public http: HttpClient, private afAuth: AngularFireAuth,  private afDatabase: AngularFireDatabase) {
     console.log('Hello HostEventProvider Provider');
   }
@@ -31,17 +31,6 @@ export class HostEventProvider {
     return hostedEvents;
   }
 
-  // getEventDetail(key:any){
-  //   this.afDatabase.list('/event/').valueChanges()
-  //     .subscribe(eventSnapshots=>{
-  //       console.log(eventSnapshots);
-  //       eventSnapshots.map(event=>{
-  //       });
-  //       if(event["key"]==key){
-  //         console.log(event);
-  //         return event;
-  //       }
-  //     });
-  // }
+
 
 }
