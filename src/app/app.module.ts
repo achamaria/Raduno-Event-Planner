@@ -39,6 +39,7 @@ import {Cordova} from "@ionic-native/core";
 import {ViewEventPage} from "../pages/view-event/view-event";
 import { HostEventProvider } from '../providers/host-event/host-event';
 import {AddExpensePage} from "../pages/add-expense/add-expense";
+import {File} from "@ionic-native/file";
 
 
 @NgModule({
@@ -105,7 +106,8 @@ import {AddExpensePage} from "../pages/add-expense/add-expense";
     FaqProvider,
     Camera,
     Contact,
-    HostEventProvider
+    HostEventProvider,
+    File
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
