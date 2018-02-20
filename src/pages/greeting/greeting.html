@@ -1,32 +1,32 @@
 <header pageTitle="Greeting"></header>
 
 <ion-content id="greeting" padding>
-  <!--<div class="row">-->
-    <!--<ion-select [(ngModel)]="selectedFontColor" (ngModelChange)="getSelectedFontColor()">-->
-      <!--<ion-option  selected>Select FontColor</ion-option>-->
-      <!--<div *ngFor="let color of colors">-->
-        <!--<ion-option [value]="color.colorCode">{{color.colorName}}</ion-option>-->
-      <!--</div>-->
-    <!--</ion-select>-->
-  <!--</div>-->
+  <ion-item>
+    <ion-select [(ngModel)]="selectedFontColor" (ngModelChange)="getSelectedFontColor()">
+      <ion-option  selected>Select FontColor</ion-option>
+      <div *ngFor="let color of colors">
+        <ion-option [value]="color.colorCode">{{color.colorName}}</ion-option>
+      </div>
+    </ion-select>
+  </ion-item>
 
-  <div class="row">
+  <ion-item>
     <ion-select [(ngModel)]="selectedBackColor" (ngModelChange)="getSelectedBackColor()">
       <ion-option  selected>Select Background Color</ion-option>
       <div *ngFor="let color of colors">
         <ion-option [value]="color.colorCode">{{color.colorName}}</ion-option>
       </div>
     </ion-select>
-  </div>
+  </ion-item>
 
-  <div class="row">
+  <ion-item>
     <ion-select [(ngModel)]="selectedFontFamily" (ngModelChange)="getSelectedFontFamily()">
       <ion-option  selected>Select FontFamily</ion-option>
       <div *ngFor="let item of fontFamily">
         <ion-option [value]="item">{{item}}</ion-option>
       </div>
     </ion-select>
-  </div>
+  </ion-item>
   <div>
     <canvas id="canvas" width="350" height="250" style="border: 1px solid #ccc"></canvas>
   </div>

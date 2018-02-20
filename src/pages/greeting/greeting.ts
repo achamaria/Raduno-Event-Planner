@@ -5,6 +5,7 @@ import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
 import firebase from "firebase";
 import {File} from "@ionic-native/file";
+import moment from "moment";
 declare var window: any;
 declare var fabric: any;
 /**
@@ -133,7 +134,7 @@ export class GreetingPage {
   getSelectedFontColor(){
     if(this.selectedText){
       console.log(this.selectedFontColor);
-      this.selectedText.fill = this.selectedFontColor;
+      this.selectedText.set({fill: this.selectedFontColor});
       this.canvas.renderAll();
     }
     else{
@@ -192,43 +193,47 @@ export class GreetingPage {
 
 
   saveGreeting(){
-    var self = this;
+    var canvasLength = this.canvas.getObjects()['length'];
+    if(canvasLength != 0){
+      var currentDate = moment();
+      console.log(currentDate.format("YYYY_DD_MM_HH_mm_ss"));
+      var fileName = 'file_' + currentDate.format("YYYY_DD_MM_HH_mm_ss") + '.jpg';
+      var self = this;
 
-    var greeting = self.canvas.toDataURL('svg');
+      var greeting = self.canvas.toDataURL('svg');
 
-    // this.afAuth.authState.take(1).subscribe(auth => {
-    //   this.hostID = auth.uid;
-    //   console.log(this.hostID);
-    //   this.afDatabase.list(`greeting`)
-    //     .push({"hostID":this.hostID, "greetingCard": greeting})
-    //     .then(() => this.navCtrl.push(GreetingPage));
-    // });
+      //saves image on database
+      // this.afAuth.authState.take(1).subscribe(auth => {
+      //   this.hostID = auth.uid;
+      //   console.log(this.hostID);
+      //   this.afDatabase.list(`greeting`)
+      //     .push({"hostID":this.hostID, "greetingCard": greeting})
+      //     .then(() => this.navCtrl.push(GreetingPage));
+      // });
 
-    console.log("image", greeting);
-    var folderpath = "file:///storage/emulated/0/";
-    // Split the base64 string in data and contentType
-    var block = greeting.split(";");
-// Get the content type
-    var dataType = block[0].split(":")[1];// In this case "image/png"
-    console.log("datatype:", dataType);
-// get the real base64 content of the file
-    var realData = block[1].split(",")[1];
-    console.log("real", realData);
+      //saves images locally on user device
+      var folderpath = "file:///storage/emulated/0/";
 
-    const bytes: string = atob(realData);
-    const byteNumbers = new Array(bytes.length);
-    for (let i = 0; i < bytes.length; i++) {
-      byteNumbers[i] = bytes.charCodeAt(i);
+      // Split the base64 string in data and contentType
+      var block = greeting.split(";");
+
+      // get the real base64 content of the file
+      var realData = block[1].split(",")[1];
+
+      const bytes: string = atob(realData);
+      const byteNumbers = new Array(bytes.length);
+      for (let i = 0; i < bytes.length; i++) {
+        byteNumbers[i] = bytes.charCodeAt(i);
+      }
+      const byteArray = new Uint8Array(byteNumbers);
+      const blob: Blob = new Blob([byteArray], { type: 'image/png' });
+      this.file.writeFile(folderpath, fileName, blob);
     }
-    const byteArray = new Uint8Array(byteNumbers);
-
-    const blob: Blob = new Blob([byteArray], { type: 'image/png' });
-
-    console.log(this.file.dataDirectory);
-    this.file.writeFile(folderpath, 'file.jpg', blob);
-
+    else {
+      this.toast.create({
+        message: `Please add atleast one text to make greeting`,
+        duration: 3000,
+      }).present();
+    }
   }
-
-
-
 }
