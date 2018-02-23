@@ -9,6 +9,8 @@ import moment from "moment";
 import {FirebaseListObservable} from "angularfire2/database-deprecated";
 import {ViewEventPage} from "../view-event/view-event";
 import {TabsPage} from "../tabs/tabs";
+import {NotificationsProvider} from "../../providers/notifications/notifications";
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -22,7 +24,8 @@ export class HomePage {
 
 
   constructor(public navParams: NavParams, private afAuth: AngularFireAuth, public navCtrl: NavController,
-              private toast: ToastController, public menu: MenuController, private afDatabase :AngularFireDatabase) {
+              private toast: ToastController, public menu: MenuController, private afDatabase :AngularFireDatabase,
+              private notificationsProvider: NotificationsProvider) {
     this.menu.enable(true);
     this.afAuth.authState.subscribe(auth => {
       this.afDatabase.list(`profile/${auth.uid}`).valueChanges().subscribe(profile => {
@@ -35,6 +38,18 @@ export class HomePage {
     this.afAuth.authState.subscribe(data=>{
       if(/*data && data.email && */data.uid) {
         this.uId = data.uid;
+
+        var notificationOpenedCallback = function(jsonData) {
+          console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+        };
+
+        window["plugins"].OneSignal
+          .startInit("69996f67-593b-4a96-b44f-b15c68d0ee53", "258729076239")
+          .handleNotificationOpened(notificationOpenedCallback)
+          .endInit();
+
+        window["plugins"].OneSignal.sendTag("uid", this.uId);
+
         this.toast.create({
           message: `Welcome to Raduno, ${data.email}`,
           duration: 3000,
@@ -90,25 +105,27 @@ export class HomePage {
       });
   }
 
-  acceptInvitation(key: string){
+  acceptInvitation(key, hostID){
     let invitees: FirebaseListObservable<any>;
-    this.afDatabase.list('/event/').valueChanges()
+
+    this.afDatabase.object(`/event/${key}`).valueChanges()
       .subscribe(eventSnapshots=>{
-        eventSnapshots.map(event=>{
-          invitees = event["invitees"];
+        console.error(eventSnapshots);
+        if(eventSnapshots["hostID"] == hostID){
+          invitees = eventSnapshots["invitees"];
           invitees.forEach(invitee=>{
             if(invitee["phone"]==this.profile["phone"]){
               if(invitee["accepted"]=="pending"){
+                console.error("in");
                 invitee["accepted"] = "accepted";
                 invitee["uid"] = this.uId.toString();
-                console.log("main data");
-                console.log(invitees);
                 this.afDatabase.database.ref(`event/${key}`).update({"invitees": invitees});
+                this.notificationsProvider.notify("Someone has accepted your invitation", hostID);
                 this.navCtrl.setRoot(TabsPage);
               }
             }
           });
-        });
+        }
       });
   }
 

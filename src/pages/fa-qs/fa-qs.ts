@@ -26,7 +26,11 @@ export class FAQsPage {
     this.faqProvider.getAnswer(this.queryForm).then(data => {
       this.answer = data["answers"][0]["answer"];
       this.faqChat.push({"question": this.queryForm, "answer": this.answer});
-    });
+    }).then(
+    ()=>{
+      this.queryForm = "";
+    }
+    );
   }
 
 }

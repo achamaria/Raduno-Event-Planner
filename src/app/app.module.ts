@@ -40,6 +40,7 @@ import {ViewEventPage} from "../pages/view-event/view-event";
 import { HostEventProvider } from '../providers/host-event/host-event';
 import {AddExpensePage} from "../pages/add-expense/add-expense";
 import {File} from "@ionic-native/file";
+import { NotificationsProvider } from '../providers/notifications/notifications';
 
 
 @NgModule({
@@ -107,7 +108,8 @@ import {File} from "@ionic-native/file";
     Camera,
     Contact,
     HostEventProvider,
-    File
+    File,
+    NotificationsProvider
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

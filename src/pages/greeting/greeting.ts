@@ -159,7 +159,7 @@ export class GreetingPage {
           this.canvas.renderAll();
           var self = this;
           fileReader.onload = function (e) {
-            fabric.Image.fromURL(e.target.result, function(img) {
+            fabric.Image.fromURL(fileReader.result, function(img) {
               self.canvas.setBackgroundImage(img, self.canvas.renderAll.bind(self.canvas), {
                 scaleX: self.canvas.width / img.width,
                 scaleY: self.canvas.height / img.height

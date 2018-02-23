@@ -14,7 +14,7 @@
       <p>{{ pendingEvent.location }}</p>
       <p>{{ pendingEvent.date }}</p>
       <br>
-      <button ion-button default (click)="acceptInvitation(pendingEvent.key)">
+      <button ion-button default (click)="acceptInvitation(pendingEvent.key, pendingEvent.hostID)">
         Accept
       </button><button ion-button default  color="danger" (click)="declineInvitation(pendingEvent.key)">
         Decline

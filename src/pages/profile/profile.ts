@@ -16,7 +16,7 @@ export class ProfilePage {
   profile: any;
   currUser: any;
   picData: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private afAuth:AngularFireAuth,private afDatabase :AngularFireDatabase) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afAuth:AngularFireAuth,private afDatabase :AngularFireDatabase) {
     this.afAuth.authState.subscribe(auth => {
       this.currUser = auth;
       this.picData = firebase.storage().ref('/').child(this.currUser.uid).getDownloadURL()
