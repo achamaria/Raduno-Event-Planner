@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController, Platform, Events} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, Platform, Events, ModalController} from 'ionic-angular';
 import {Camera} from "@ionic-native/camera";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
@@ -44,7 +44,8 @@ export class GreetingPage {
 
   constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,
               private toast: ToastController, public camera: Camera, private afAuth:AngularFireAuth,
-              private afDatabase :AngularFireDatabase, public file: File, public events: Events) {
+              private afDatabase :AngularFireDatabase, public file: File, public events: Events,
+              public modalCtrl: ModalController) {
 
 
     this.toast.create({
@@ -241,35 +242,23 @@ export class GreetingPage {
   }
 
   useDefaultGreeting() {
-    var self = this;
-    // let pop_back = function(_params) {
-    //   fabric.Image.fromURL(_params.url, function(img) {
-    //     self.canvas.setBackgroundImage(img, self.canvas.renderAll.bind(self.canvas), {
-    //       scaleX: self.canvas.width / img.width,
-    //       scaleY: self.canvas.height / img.height
-    //     });
-    //   });
-    //   return new Promise((resolve, reject) => {
-    //     resolve();
-    //   });
-    // };
-    // this.navCtrl.push(DefaultGreetingPage, {
-    //   callback: pop_back
-    // });
 
+    var self = this;
     this.events.subscribe('imageUrl', (_params) => {
-      console.log("ddshf", _params.url);
+      this.clearCanvasBackground();
       fabric.Image.fromURL(_params.url, function(img) {
         console.log(self.canvas.width / img.width);
         console.log(self.canvas.height / img.height);
         self.canvas.setBackgroundImage(img, self.canvas.renderAll.bind(self.canvas), {
-          scaleX: (self.canvas.width / img.width)/2,
-          scaleY: (self.canvas.height / img.height)/2
+          scaleX: (self.canvas.width / img.width),
+          scaleY: (self.canvas.height / img.height)
         });
       });
       this.events.unsubscribe('imageUrl');
-    })
-    this.navCtrl.push(DefaultGreetingPage);
+      this.canvas.renderAll();
+    });
+    let modal = this.modalCtrl.create(DefaultGreetingPage);
+    modal.present();
 
   }
 

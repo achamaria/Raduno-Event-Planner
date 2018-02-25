@@ -28,8 +28,6 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = LoginPage;
 
-  //pages: Array<{title: string, pageName: any, component: any, icon: string}>;
-
   pages: PageInterface[] = [
     { title: 'Profile', pageName: 'TabsPage', component: ProfilePage, index: 0, icon: 'person' },
     { title: 'Settings', pageName: 'TabsPage', component: SettingsPage, index: 1, icon: "settings" },

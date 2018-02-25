@@ -2,8 +2,9 @@
 
 <ion-content id="greeting" padding>
   <ion-item>
+    <ion-label>Font Color: </ion-label>
     <ion-select [(ngModel)]="selectedFontColor" (ngModelChange)="getSelectedFontColor()">
-      <ion-option  selected>Select FontColor</ion-option>
+      <ion-option selected="">Select</ion-option>
       <div *ngFor="let color of colors">
         <ion-option [value]="color.colorCode">{{color.colorName}}</ion-option>
       </div>
@@ -11,8 +12,9 @@
   </ion-item>
 
   <ion-item>
+    <ion-label>Background Color: </ion-label>
     <ion-select [(ngModel)]="selectedBackColor" (ngModelChange)="getSelectedBackColor()">
-      <ion-option  selected>Select Background Color</ion-option>
+      <ion-option selected="">Select</ion-option>
       <div *ngFor="let color of colors">
         <ion-option [value]="color.colorCode">{{color.colorName}}</ion-option>
       </div>
@@ -20,8 +22,9 @@
   </ion-item>
 
   <ion-item>
+    <ion-label>Font Family: </ion-label>
     <ion-select [(ngModel)]="selectedFontFamily" (ngModelChange)="getSelectedFontFamily()">
-      <ion-option  selected>Select FontFamily</ion-option>
+      <ion-option selected="">Select</ion-option>
       <div *ngFor="let item of fontFamily">
         <ion-option [value]="item">{{item}}</ion-option>
       </div>

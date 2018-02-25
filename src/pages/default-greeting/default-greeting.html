@@ -1,8 +1,19 @@
-<header pageTitle="Default Greeting"></header>
-
+<ion-header>
+  <ion-navbar>
+  <ion-toolbar>
+    <ion-title>
+      Default Greeting
+    </ion-title>
+    <ion-buttons start>
+      <button ion-button (click)="dismiss()">
+        <span ion-text color="light">Cancel</span>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+  </ion-navbar>
+</ion-header>
 
 <ion-content padding>
-  <br><br>
   <form>
     <ion-grid>
       <ion-row text-center>
