@@ -12,6 +12,7 @@ import {FAQsPage} from "../pages/fa-qs/fa-qs";
 import {AngularFireAuth} from "angularfire2/auth";
 import { TabsPage } from "../pages/tabs/tabs";
 import moment from 'moment';
+import {HomePage} from "../pages/home/home";
 
 export interface PageInterface {
   title: string;
