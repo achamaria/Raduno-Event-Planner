@@ -41,6 +41,7 @@ import { HostEventProvider } from '../providers/host-event/host-event';
 import {AddExpensePage} from "../pages/add-expense/add-expense";
 import {File} from "@ionic-native/file";
 import {DefaultGreetingPage} from "../pages/default-greeting/default-greeting";
+import { NotificationsProvider } from '../providers/notifications/notifications';
 
 
 @NgModule({
@@ -110,7 +111,8 @@ import {DefaultGreetingPage} from "../pages/default-greeting/default-greeting";
     Camera,
     Contact,
     HostEventProvider,
-    File
+    File,
+    NotificationsProvider
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
