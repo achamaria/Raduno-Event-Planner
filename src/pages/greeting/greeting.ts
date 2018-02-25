@@ -1,11 +1,12 @@
 import { Component} from '@angular/core';
-import {IonicPage, NavController, NavParams, ToastController, Platform} from 'ionic-angular';
+import {IonicPage, NavController, NavParams, ToastController, Platform, Events} from 'ionic-angular';
 import {Camera} from "@ionic-native/camera";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
 import firebase from "firebase";
 import {File} from "@ionic-native/file";
 import moment from "moment";
+import {DefaultGreetingPage} from "../default-greeting/default-greeting";
 declare var window: any;
 declare var fabric: any;
 /**
@@ -32,7 +33,7 @@ export class GreetingPage {
   public  selectedBackColor;
   public Fbref:any;
   picData: any;
-
+  imageUrl: any;
   hostID: any;
 
   public selectedFontFamily;
@@ -43,7 +44,7 @@ export class GreetingPage {
 
   constructor(public platform: Platform, public navCtrl: NavController, public navParams: NavParams,
               private toast: ToastController, public camera: Camera, private afAuth:AngularFireAuth,
-              private afDatabase :AngularFireDatabase, public file: File) {
+              private afDatabase :AngularFireDatabase, public file: File, public events: Events) {
 
 
     this.toast.create({
@@ -75,11 +76,13 @@ export class GreetingPage {
       'colorName': 'Green',
       'colorCode': '#00ff00'
     });
+
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     this.canvas = new fabric.Canvas('canvas');
   }
+
 
   addText(){
 
@@ -159,7 +162,7 @@ export class GreetingPage {
           this.canvas.renderAll();
           var self = this;
           fileReader.onload = function (e) {
-            fabric.Image.fromURL(e.target.result, function(img) {
+            fabric.Image.fromURL(fileReader.result, function(img) {
               self.canvas.setBackgroundImage(img, self.canvas.renderAll.bind(self.canvas), {
                 scaleX: self.canvas.width / img.width,
                 scaleY: self.canvas.height / img.height
@@ -209,7 +212,7 @@ export class GreetingPage {
       //   this.afDatabase.list(`greeting`)
       //     .push({"hostID":this.hostID, "greetingCard": greeting})
       //     .then(() => this.navCtrl.push(GreetingPage));
-      // });
+      //});
 
       //saves images locally on user device
       var folderpath = "file:///storage/emulated/0/";
@@ -236,4 +239,38 @@ export class GreetingPage {
       }).present();
     }
   }
+
+  useDefaultGreeting() {
+    var self = this;
+    // let pop_back = function(_params) {
+    //   fabric.Image.fromURL(_params.url, function(img) {
+    //     self.canvas.setBackgroundImage(img, self.canvas.renderAll.bind(self.canvas), {
+    //       scaleX: self.canvas.width / img.width,
+    //       scaleY: self.canvas.height / img.height
+    //     });
+    //   });
+    //   return new Promise((resolve, reject) => {
+    //     resolve();
+    //   });
+    // };
+    // this.navCtrl.push(DefaultGreetingPage, {
+    //   callback: pop_back
+    // });
+
+    this.events.subscribe('imageUrl', (_params) => {
+      console.log("ddshf", _params.url);
+      fabric.Image.fromURL(_params.url, function(img) {
+        console.log(self.canvas.width / img.width);
+        console.log(self.canvas.height / img.height);
+        self.canvas.setBackgroundImage(img, self.canvas.renderAll.bind(self.canvas), {
+          scaleX: (self.canvas.width / img.width)/2,
+          scaleY: (self.canvas.height / img.height)/2
+        });
+      });
+      this.events.unsubscribe('imageUrl');
+    })
+    this.navCtrl.push(DefaultGreetingPage);
+
+  }
+
 }

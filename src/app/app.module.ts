@@ -40,6 +40,7 @@ import {ViewEventPage} from "../pages/view-event/view-event";
 import { HostEventProvider } from '../providers/host-event/host-event';
 import {AddExpensePage} from "../pages/add-expense/add-expense";
 import {File} from "@ionic-native/file";
+import {DefaultGreetingPage} from "../pages/default-greeting/default-greeting";
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import {File} from "@ionic-native/file";
     FAQsPage,
     EditProfilePage,
     ViewEventPage,
-    AddExpensePage
+    AddExpensePage,
+    DefaultGreetingPage
   ],
   imports: [
     BrowserModule,
@@ -94,7 +96,8 @@ import {File} from "@ionic-native/file";
     FAQsPage,
     EditProfilePage,
     ViewEventPage,
-    AddExpensePage
+    AddExpensePage,
+    DefaultGreetingPage
   ],
   providers: [
     StatusBar,
