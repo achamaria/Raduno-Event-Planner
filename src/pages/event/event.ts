@@ -36,7 +36,7 @@ export class EventPage {
       public alertCtrl: AlertController, private afAuth: AngularFireAuth,  private afDatabase: AngularFireDatabase) {
 
       this.EventFormGroup = this.formBuilder.group({
-      title: ['', Validators.compose([ Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('[a-zA-Z]*')])],
+      title: ['', Validators.compose([ Validators.required, Validators.minLength(5), Validators.maxLength(30), Validators.pattern('[a-zA-Z a-zA-Z]*')])],
       date: ['', Validators.compose([ Validators.required])],
       location: ['', Validators.compose([ Validators.required, Validators.maxLength(30)])],
       budget: [" "]

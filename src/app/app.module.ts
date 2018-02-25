@@ -40,6 +40,7 @@ import {ViewEventPage} from "../pages/view-event/view-event";
 import { HostEventProvider } from '../providers/host-event/host-event';
 import {AddExpensePage} from "../pages/add-expense/add-expense";
 import {File} from "@ionic-native/file";
+import {DefaultGreetingPage} from "../pages/default-greeting/default-greeting";
 import { NotificationsProvider } from '../providers/notifications/notifications';
 
 
@@ -63,7 +64,8 @@ import { NotificationsProvider } from '../providers/notifications/notifications'
     FAQsPage,
     EditProfilePage,
     ViewEventPage,
-    AddExpensePage
+    AddExpensePage,
+    DefaultGreetingPage
   ],
   imports: [
     BrowserModule,
@@ -95,7 +97,8 @@ import { NotificationsProvider } from '../providers/notifications/notifications'
     FAQsPage,
     EditProfilePage,
     ViewEventPage,
-    AddExpensePage
+    AddExpensePage,
+    DefaultGreetingPage
   ],
   providers: [
     StatusBar,
