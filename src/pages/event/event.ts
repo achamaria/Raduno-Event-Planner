@@ -125,11 +125,11 @@ export class EventPage {
     let self = this;
     if(self.contactList.length < 10) {
       navigator.contacts.pickContact(function (contact) {
-        console.log("Sdfasd" + self.contactList.length);
-        var obj = {"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'], "accepted": "pending"};
-        console.log("sdfasd" + self.contactList.indexOf(obj));
-        console.log("data" + JSON.stringify(self.contactList[0]));
-        console.log("data1" + JSON.stringify(obj));
+        console.log("Sdfasd" + contact.phoneNumbers[0]['value'].replace(/[- )(]/g,''));
+        var obj = {"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'].replace(/[- )(]/g,''), "accepted": "pending"};
+        // console.log("sdfasd" + self.contactList.indexOf(obj));
+        // console.log("data" + JSON.stringify(self.contactList[0]));
+        // console.log("data1" + JSON.stringify(obj));
         if(self.checkDuplicateContacts(obj, self.contactList)){
           let alert = self.alertCtrl.create({
             title: 'Warning!',
@@ -138,9 +138,9 @@ export class EventPage {
           });
           alert.present();
         }else{
-          self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'], "accepted": "pending"});
+          self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'].replace(/[- )(]/g,''), "accepted": "pending"});
         }
-        console.log(self.contactList);
+        // console.log(self.contactList);
       }, function (err) {
         console.log('Error: ' + err);
       });
