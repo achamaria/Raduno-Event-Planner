@@ -232,6 +232,7 @@ export class GreetingPage {
       const byteArray = new Uint8Array(byteNumbers);
       const blob: Blob = new Blob([byteArray], { type: 'image/png' });
       this.file.writeFile(folderpath, fileName, blob);
+
     }
     else {
       this.toast.create({

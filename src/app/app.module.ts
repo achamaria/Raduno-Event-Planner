@@ -42,6 +42,7 @@ import {AddExpensePage} from "../pages/add-expense/add-expense";
 import {File} from "@ionic-native/file";
 import {DefaultGreetingPage} from "../pages/default-greeting/default-greeting";
 import { NotificationsProvider } from '../providers/notifications/notifications';
+import {EventSummaryPage} from "../pages/event-summary/event-summary";
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { NotificationsProvider } from '../providers/notifications/notifications'
     EditProfilePage,
     ViewEventPage,
     AddExpensePage,
-    DefaultGreetingPage
+    DefaultGreetingPage,
+    EventSummaryPage
   ],
   imports: [
     BrowserModule,
@@ -98,7 +100,8 @@ import { NotificationsProvider } from '../providers/notifications/notifications'
     EditProfilePage,
     ViewEventPage,
     AddExpensePage,
-    DefaultGreetingPage
+    DefaultGreetingPage,
+    EventSummaryPage
   ],
   providers: [
     StatusBar,
