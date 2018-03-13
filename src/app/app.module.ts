@@ -43,6 +43,8 @@ import {File} from "@ionic-native/file";
 import {DefaultGreetingPage} from "../pages/default-greeting/default-greeting";
 import { NotificationsProvider } from '../providers/notifications/notifications';
 import {EventSummaryPage} from "../pages/event-summary/event-summary";
+import { CalendarModule } from 'ionic3-calendar-en';
+import {Calendar} from "@ionic-native/calendar";
 
 
 @NgModule({
@@ -77,7 +79,8 @@ import {EventSummaryPage} from "../pages/event-summary/event-summary";
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     HttpClientModule,
-    Ionic2RatingModule
+    Ionic2RatingModule,
+    CalendarModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -115,7 +118,8 @@ import {EventSummaryPage} from "../pages/event-summary/event-summary";
     Contact,
     HostEventProvider,
     File,
-    NotificationsProvider
+    NotificationsProvider,
+    Calendar
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

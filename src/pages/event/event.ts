@@ -94,15 +94,15 @@ export class EventPage {
             }
             // inserts new event to the database
             if(!flag && !pastDate){
-              this.hostID = auth.uid;
-              this.date = moment(this.date).format('lll');
-              console.log("this.date: " + this.date);
-              this.key = this.afDatabase.list(`event`)
-                .push({"hostID":this.hostID, "title": this.title, "date": this.date, "location": this.location,
-                  "budget": this.budget, "invitees": this.contactList}).key;
-              console.log("new key: " + this.key);
-              this.afDatabase.database.ref(`event/${this.key}`).update({"key": this.key});
-              console.log("new key: " + this.key)
+              // this.hostID = auth.uid;
+              // this.date = moment(this.date).format('lll');
+              // console.log("this.date: " + this.date);
+              // this.key = this.afDatabase.list(`event`)
+              //   .push({"hostID":this.hostID, "title": this.title, "date": this.date, "location": this.location,
+              //     "budget": this.budget, "invitees": this.contactList}).key;
+              // console.log("new key: " + this.key);
+              // this.afDatabase.database.ref(`event/${this.key}`).update({"key": this.key});
+              // console.log("new key: " + this.key)
               this.navCtrl.push(GreetingPage);
             }
           });

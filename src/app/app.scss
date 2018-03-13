@@ -74,13 +74,17 @@ ion-header{
   }
 }
 
-#profile, #editProfile, #event, #greeting{
+#profile, #editProfile, #event, #greeting, #calendar{
   margin-top: 40px;
 
   .danger{
     color: red;
     padding-left: 5%;
 
+  }
+
+  #today-btn{
+    margin-left: 30%;
   }
 }
 

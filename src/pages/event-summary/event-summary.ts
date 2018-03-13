@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 
 /**
  * Generated class for the EventSummaryPage page.
@@ -15,11 +15,22 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class EventSummaryPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  image: any;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    this.image = this.navParams.get('image');
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad EventSummaryPage');
   }
 
+  showAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Congratulations!',
+      subTitle: 'Event confirmed and invitation sent',
+      buttons: ['OK']
+    });
+    alert.present();
+  }
 }

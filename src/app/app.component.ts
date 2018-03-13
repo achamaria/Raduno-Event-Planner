@@ -13,6 +13,7 @@ import {AngularFireAuth} from "angularfire2/auth";
 import { TabsPage } from "../pages/tabs/tabs";
 import moment from 'moment';
 import {HomePage} from "../pages/home/home";
+import {GreetingPage} from "../pages/greeting/greeting";
 
 export interface PageInterface {
   title: string;

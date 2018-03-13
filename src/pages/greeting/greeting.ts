@@ -7,6 +7,7 @@ import firebase from "firebase";
 import {File} from "@ionic-native/file";
 import moment from "moment";
 import {DefaultGreetingPage} from "../default-greeting/default-greeting";
+import {EventSummaryPage} from "../event-summary/event-summary";
 declare var window: any;
 declare var fabric: any;
 /**
@@ -200,7 +201,6 @@ export class GreetingPage {
     var canvasLength = this.canvas.getObjects()['length'];
     if(canvasLength != 0){
       var currentDate = moment();
-      console.log(currentDate.format("YYYY_DD_MM_HH_mm_ss"));
       var fileName = 'file_' + currentDate.format("YYYY_DD_MM_HH_mm_ss") + '.jpg';
       var self = this;
 
@@ -232,7 +232,7 @@ export class GreetingPage {
       const byteArray = new Uint8Array(byteNumbers);
       const blob: Blob = new Blob([byteArray], { type: 'image/png' });
       this.file.writeFile(folderpath, fileName, blob);
-
+      this.navCtrl.push(EventSummaryPage, { image: greeting });
     }
     else {
       this.toast.create({
@@ -260,7 +260,6 @@ export class GreetingPage {
     });
     let modal = this.modalCtrl.create(DefaultGreetingPage);
     modal.present();
-
   }
 
 }

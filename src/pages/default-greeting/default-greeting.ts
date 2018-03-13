@@ -20,7 +20,7 @@ export class DefaultGreetingPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events,
               public viewCtrl: ViewController) {
-    this.callback = this.navParams.get("callback")
+    this.callback = this.navParams.get("callback");
   }
 
   ionViewDidLoad() {
