@@ -36,6 +36,7 @@ export class GreetingPage {
   picData: any;
   imageUrl: any;
   hostID: any;
+  eventDetails = [];
 
   public selectedFontFamily;
   fontFamily = ['Arial', 'Georgia', 'Monaco', 'Hoefler Text', 'Courier', 'Calibri', 'Apple Chancery',
@@ -48,6 +49,8 @@ export class GreetingPage {
               private afDatabase :AngularFireDatabase, public file: File, public events: Events,
               public modalCtrl: ModalController) {
 
+    this.eventDetails = this.navParams.get('event_details');
+    console.log("sdsds", this.eventDetails);
 
     this.toast.create({
       message: `Event is successfully created.`,
@@ -206,14 +209,14 @@ export class GreetingPage {
 
       var greeting = self.canvas.toDataURL('svg');
 
-      //saves image on database
-      // this.afAuth.authState.take(1).subscribe(auth => {
-      //   this.hostID = auth.uid;
-      //   console.log(this.hostID);
-      //   this.afDatabase.list(`greeting`)
-      //     .push({"hostID":this.hostID, "greetingCard": greeting})
-      //     .then(() => this.navCtrl.push(GreetingPage));
-      //});
+     // saves image on database
+     //  this.afAuth.authState.take(1).subscribe(auth => {
+     //    this.hostID = auth.uid;
+     //    console.log(this.hostID);
+     //    this.afDatabase.list(`greeting`)
+     //      .push({"hostID":this.hostID, "greetingCard": greeting})
+     //      .then(() => this.navCtrl.push(GreetingPage));
+     //  });
 
       //saves images locally on user device
       var folderpath = "file:///storage/emulated/0/";
@@ -232,7 +235,7 @@ export class GreetingPage {
       const byteArray = new Uint8Array(byteNumbers);
       const blob: Blob = new Blob([byteArray], { type: 'image/png' });
       this.file.writeFile(folderpath, fileName, blob);
-      this.navCtrl.push(EventSummaryPage, { image: greeting });
+      this.navCtrl.push(EventSummaryPage, { image: greeting, event_details: this.eventDetails });
     }
     else {
       this.toast.create({

@@ -35,7 +35,7 @@ export class RegisterPage {
               public alertCtrl: AlertController, private afAuth: AngularFireAuth,
               private afDatabase: AngularFireDatabase) {
     this.registerFormGroup = this.formBuilder.group({
-      fname: ['', Validators.compose([ Validators.required, Validators.maxLength(30), Validators.pattern('[a-zA-Z]*')])],
+      fname: ['', Validators.compose([ Validators.required, Validators.maxLength(30), Validators.pattern('[a-zA-Z a-zA-Z]*')])],
       username: ['', Validators.compose([ Validators.required, Validators.maxLength(15), Validators.pattern('[a-zA-Z0-9]*')])],
       email: ['', Validators.compose([ Validators.required, Validators.email, Validators.maxLength(35)])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],

@@ -21,6 +21,7 @@ import moment from "moment";
 export class EventPage {
 
   contactList = [];
+  eventDetails = [];
 
   private EventFormGroup : FormGroup;
 
@@ -32,6 +33,7 @@ export class EventPage {
 
   hostID: any;
   key: string | null;
+
     constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
       public alertCtrl: AlertController, private afAuth: AngularFireAuth,  private afDatabase: AngularFireDatabase) {
 
@@ -94,16 +96,12 @@ export class EventPage {
             }
             // inserts new event to the database
             if(!flag && !pastDate){
-              // this.hostID = auth.uid;
-              // this.date = moment(this.date).format('lll');
-              // console.log("this.date: " + this.date);
-              // this.key = this.afDatabase.list(`event`)
-              //   .push({"hostID":this.hostID, "title": this.title, "date": this.date, "location": this.location,
-              //     "budget": this.budget, "invitees": this.contactList}).key;
-              // console.log("new key: " + this.key);
-              // this.afDatabase.database.ref(`event/${this.key}`).update({"key": this.key});
-              // console.log("new key: " + this.key)
-              this.navCtrl.push(GreetingPage);
+              this.hostID = auth.uid;
+              this.date = moment(this.date).format('lll');
+
+              this.eventDetails.push({"hostID":this.hostID, "title": this.title, "date": this.date, "location": this.location,
+                "budget": this.budget, "invitees": this.contactList});
+              this.navCtrl.push(GreetingPage, { event_details: this.eventDetails });
             }
           });
 
@@ -127,9 +125,6 @@ export class EventPage {
       navigator.contacts.pickContact(function (contact) {
         console.log("Sdfasd" + contact.phoneNumbers[0]['value'].replace(/[- )(]/g,''));
         var obj = {"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'].replace(/[- )(]/g,''), "accepted": "pending"};
-        // console.log("sdfasd" + self.contactList.indexOf(obj));
-        // console.log("data" + JSON.stringify(self.contactList[0]));
-        // console.log("data1" + JSON.stringify(obj));
         if(self.checkDuplicateContacts(obj, self.contactList)){
           let alert = self.alertCtrl.create({
             title: 'Warning!',
@@ -140,7 +135,6 @@ export class EventPage {
         }else{
           self.contactList.push({"name": contact.displayName, "phone": contact.phoneNumbers[0]['value'].replace(/[- )(]/g,''), "accepted": "pending"});
         }
-        // console.log(self.contactList);
       }, function (err) {
         console.log('Error: ' + err);
       });
