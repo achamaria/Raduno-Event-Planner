@@ -45,6 +45,7 @@ import { NotificationsProvider } from '../providers/notifications/notifications'
 import {EventSummaryPage} from "../pages/event-summary/event-summary";
 import { CalendarModule } from 'ionic3-calendar-en';
 import {Calendar} from "@ionic-native/calendar";
+import {SMS} from "@ionic-native/sms";
 
 
 @NgModule({
@@ -119,7 +120,8 @@ import {Calendar} from "@ionic-native/calendar";
     HostEventProvider,
     File,
     NotificationsProvider,
-    Calendar
+    Calendar,
+    SMS
     // {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
