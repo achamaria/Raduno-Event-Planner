@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup, AbstractControl} from '@angular/forms';
 import { LoginPage } from "../login/login";
+import {AngularFireAuth} from "angularfire2/auth";
+import {TabsPage} from "../tabs/tabs";
 /**
  * Generated class for the ForgotPasswordPage page.
  *
@@ -18,20 +20,20 @@ export class ForgotPasswordPage {
 
   private forgotGroup : FormGroup;
 
-  password: AbstractControl;
-  confirmPass: AbstractControl;
-  username: AbstractControl;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder, public alertCtrl: AlertController) {
+  // password: AbstractControl;
+  // confirmPass: AbstractControl;
+  email: AbstractControl;
+  constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
+              private afAuth: AngularFireAuth, public alertCtrl: AlertController) {
     this.forgotGroup = this.formBuilder.group({
-      username: ['', Validators.required, Validators.maxLength(15)],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
-      confirmPass: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
+      email: ['', Validators.compose([ Validators.required, Validators.email, Validators.maxLength(35)])]
+      // password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
+      // confirmPass: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
     });
 
-    this.username = this.forgotGroup.controls['username'];
-    this.password = this.forgotGroup.controls['password'];
-    this.confirmPass = this.forgotGroup.controls['confirmPass'];
+    this.email = this.forgotGroup.controls['email'];
+    // this.password = this.forgotGroup.controls['password'];
+    // this.confirmPass = this.forgotGroup.controls['confirmPass'];
   }
 
   ionViewDidLoad() {
@@ -39,18 +41,35 @@ export class ForgotPasswordPage {
   }
 
   showLogin(){
-    // if(this.forgotGroup.valid)
-    //   this.navCtrl.push(LoginPage);
-    // else {
-    //   this.showAlert();
-    // }
     this.navCtrl.push(LoginPage);
+  }
+
+  changePassword(){
+    if(this.forgotGroup.valid) {
+      this.afAuth.auth.sendPasswordResetEmail(this.forgotGroup.get('email').value);
+      this.showSuccessAlert();
+      this.navCtrl.push(LoginPage);
+    }
+    else {
+      this.showAlert();
+    }
   }
 
   showAlert() {
     let alertEmpty = this.alertCtrl.create({
       title: 'Required!',
-      subTitle: 'username and password should not be empty',
+      subTitle: 'Please enter a valid email address',
+      buttons: ['OK']
+    });
+
+    alertEmpty.present();
+
+  }
+
+  showSuccessAlert() {
+    let alertEmpty = this.alertCtrl.create({
+      title: 'Success!',
+      subTitle: 'Password reset link has been sent to your email address.',
       buttons: ['OK']
     });
 
