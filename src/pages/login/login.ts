@@ -34,6 +34,11 @@ export class LoginPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
               public alertCtrl: AlertController, private afAuth: AngularFireAuth, private toast: ToastController,
               public menu: MenuController) {
+    this.afAuth.authState.subscribe(user => {
+      if (user) {
+        this.navCtrl.push(HomePage);
+      }
+    });
     this.loginGroup = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
