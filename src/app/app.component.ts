@@ -53,7 +53,7 @@ export class MyApp {
       //   .startInit("69996f67-593b-4a96-b44f-b15c68d0ee53", "258729076239")
       //   .handleNotificationOpened(notificationOpenedCallback)
       //   .endInit();
-      //
+
       // window["plugins"].OneSignal.sendTag("key", "value");
     });
 

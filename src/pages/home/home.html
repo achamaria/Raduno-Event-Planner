@@ -16,7 +16,7 @@
   <ion-list *ngFor="let pendingEvent of pendingEvents">
     <ion-item>
       <ion-thumbnail item-start>
-        <img src="assets/imgs/logo.png">
+        <img src="{{pendingEvent.greetingCard}}">
       </ion-thumbnail>
       <h2>{{ pendingEvent.title }}</h2>
       <button ion-button default float-right (click)="viewEvent(pendingEvent.key)">
