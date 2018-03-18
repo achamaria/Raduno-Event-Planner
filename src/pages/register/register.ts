@@ -39,7 +39,7 @@ export class RegisterPage {
       username: ['', Validators.compose([ Validators.required, Validators.maxLength(15), Validators.pattern('[a-zA-Z0-9]*')])],
       email: ['', Validators.compose([ Validators.required, Validators.email, Validators.maxLength(35)])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
-      phone: ['', Validators.compose([Validators.required, Validators.pattern('([0-9]{3})\\)?[-.●]?([0-9]{3})[-.●]?([0-9]{4})')])],
+      phone: ['', Validators.compose([Validators.required, Validators.pattern('([2-9]\\d{2})(\\D*)([2-9]\\d{2})(\\D*)(\\d{4})')])],
       dob: ['', Validators.required],
     });
 

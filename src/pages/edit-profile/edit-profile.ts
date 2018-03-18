@@ -7,6 +7,7 @@ import {Profile} from "../../models/profile";
 import firebase from "firebase";
 import {ProfilePage} from "../profile/profile";
 import {Camera} from "@ionic-native/camera";
+import {FormGroup} from "@angular/forms";
 declare var window: any;
 
 /**
@@ -30,6 +31,7 @@ export class EditProfilePage {
 
   editUser = {} as User;
   editProfile = {} as Profile;
+  private editProfileFormGroup : FormGroup;
 
   picData: any;
   picdata: any;

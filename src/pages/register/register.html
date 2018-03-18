@@ -35,7 +35,7 @@
     <div  class="danger" *ngIf="!registerFormGroup.controls['phone'].valid && registerFormGroup.controls['phone'].touched">*Phone is required with valid phone format</div>
     <ion-item>
       <ion-label>Date of Birth :</ion-label>
-      <ion-datetime displayFormat="MM/DD/YYYY"  formControlName="dob" [(ngModel)]="profile.dob"></ion-datetime>
+      <ion-datetime displayFormat="MM/DD/YYYY"  min="1920" max="2004" formControlName="dob" [(ngModel)]="profile.dob"></ion-datetime>
     </ion-item>
     <div  class="danger" *ngIf="!registerFormGroup.controls['dob'].valid && registerFormGroup.controls['dob'].touched">*Valid date is required</div>
     <br>

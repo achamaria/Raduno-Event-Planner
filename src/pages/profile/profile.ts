@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import { IonicPage, NavController, NavParams, Nav } from 'ionic-angular';
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
 import {EditProfilePage} from "../edit-profile/edit-profile";
@@ -13,6 +13,7 @@ import {FirebaseObjectObservable} from "angularfire2/database-deprecated";
   templateUrl: 'profile.html',
 })
 export class ProfilePage {
+  @ViewChild(Nav) nav: Nav;
   profile: any;
   currUser: any;
   picData: any;
