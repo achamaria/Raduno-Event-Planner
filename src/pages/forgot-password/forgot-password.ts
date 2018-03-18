@@ -20,21 +20,20 @@ export class ForgotPasswordPage {
 
   private forgotGroup : FormGroup;
 
-  password: AbstractControl;
-  confirmPass: AbstractControl;
+  // password: AbstractControl;
+  // confirmPass: AbstractControl;
   email: AbstractControl;
-
   constructor(public navCtrl: NavController, public navParams: NavParams, private formBuilder: FormBuilder,
               private afAuth: AngularFireAuth, public alertCtrl: AlertController) {
     this.forgotGroup = this.formBuilder.group({
-      email: ['', Validators.required, Validators.maxLength(15)],
-      password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
-      confirmPass: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
+      email: ['', Validators.compose([ Validators.required, Validators.email, Validators.maxLength(35)])]
+      // password: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
+      // confirmPass: ['', Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(15)])],
     });
 
     this.email = this.forgotGroup.controls['email'];
-    this.password = this.forgotGroup.controls['password'];
-    this.confirmPass = this.forgotGroup.controls['confirmPass'];
+    // this.password = this.forgotGroup.controls['password'];
+    // this.confirmPass = this.forgotGroup.controls['confirmPass'];
   }
 
   ionViewDidLoad() {
@@ -42,20 +41,35 @@ export class ForgotPasswordPage {
   }
 
   showLogin(){
+    this.navCtrl.push(LoginPage);
+  }
+
+  changePassword(){
     if(this.forgotGroup.valid) {
-      this.afAuth.auth.sendPasswordResetEmail(String(this.email));
+      this.afAuth.auth.sendPasswordResetEmail(this.forgotGroup.get('email').value);
+      this.showSuccessAlert();
       this.navCtrl.push(LoginPage);
     }
     else {
       this.showAlert();
     }
-    this.navCtrl.push(LoginPage);
   }
 
   showAlert() {
     let alertEmpty = this.alertCtrl.create({
       title: 'Required!',
-      subTitle: 'email and password should not be empty',
+      subTitle: 'Please enter a valid email address',
+      buttons: ['OK']
+    });
+
+    alertEmpty.present();
+
+  }
+
+  showSuccessAlert() {
+    let alertEmpty = this.alertCtrl.create({
+      title: 'Success!',
+      subTitle: 'Password reset link has been sent to your email address.',
       buttons: ['OK']
     });
 
