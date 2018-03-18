@@ -36,7 +36,7 @@ export class LoginPage {
               public menu: MenuController) {
     this.afAuth.authState.subscribe(user => {
       if (user) {
-        this.navCtrl.push(HomePage);
+        this.navCtrl.setRoot(TabsPage);
       }
     });
     this.loginGroup = this.formBuilder.group({

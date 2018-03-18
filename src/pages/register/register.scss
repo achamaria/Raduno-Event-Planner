@@ -3,5 +3,8 @@ page-register {
     overflow-x: unset;
     overflow-y: auto;
   }
+  ion-img{
+    background: color($colors, primary);
+  }
 
 }
