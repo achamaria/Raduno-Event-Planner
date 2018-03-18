@@ -39,7 +39,7 @@
       <ion-label>Date of Birth :</ion-label>
       <ion-datetime displayFormat="MM/DD/YYYY"  min="1920" max="2004" formControlName="dob" [(ngModel)]="profile.dob"></ion-datetime>
     </ion-item>
-    <div  class="danger" *ngIf="!registerFormGroup.controls['dob'].valid && registerFormGroup.controls['dob'].touched">*Valid date is required</div>
+    <div  class="danger" *ngIf="!registerFormGroup.controls['dob'].valid && registerFormGroup.controls['dob'].touched">*Min age should be 14 for creating an account</div>
     <br>
     <div class="registerBtn">
       <button ion-button color="dark" (click)="register(user, profile)" type="submit">Register</button>

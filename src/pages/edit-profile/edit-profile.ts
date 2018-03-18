@@ -7,7 +7,7 @@ import {Profile} from "../../models/profile";
 import firebase from "firebase";
 import {ProfilePage} from "../profile/profile";
 import {Camera} from "@ionic-native/camera";
-import {FormGroup} from "@angular/forms";
+import {FormGroup, Validators, FormBuilder} from "@angular/forms";
 declare var window: any;
 
 /**
@@ -40,7 +40,8 @@ export class EditProfilePage {
 
   public Fbref:any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private afAuth:AngularFireAuth, private afDatabase :AngularFireDatabase, public camera :Camera) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private afAuth:AngularFireAuth, private afDatabase :AngularFireDatabase,
+              public camera :Camera, private formBuilder: FormBuilder) {
 
     this.mypicref = firebase.storage().ref('/');
 
@@ -64,6 +65,15 @@ export class EditProfilePage {
         console.log("Current User Profile: ");
         console.log(this.editProfile);
       });
+    });
+
+    this.editProfileFormGroup = this.formBuilder.group({
+      name: ['', Validators.compose([ Validators.required, Validators.maxLength(30), Validators.pattern('[a-zA-Z a-zA-Z]*')])],
+      username: ['', Validators.compose([ Validators.required, Validators.maxLength(15), Validators.pattern('[a-zA-Z0-9]*')])],
+      email: ['', Validators.compose([Validators.email, Validators.maxLength(35)])],
+      password: ['', Validators.compose([Validators.minLength(6), Validators.maxLength(15)])],
+      phone: ['', Validators.compose([Validators.required, Validators.pattern('([2-9]\\d{2})(\\D*)([2-9]\\d{2})(\\D*)(\\d{4})')])],
+      dob: ['']
     });
   }
 

@@ -22,16 +22,12 @@ export class ProfilePage {
       this.currUser = auth;
       this.picData = firebase.storage().ref('/').child(this.currUser.uid).getDownloadURL()
         .then(function(url){
-          console.log("log1: " + url);
           return url;
         }).catch(res=>{
-          console.log("errrrrrrrrrrrrrrrrrrrrrr");
+          console.log("error");
         });
       this.afDatabase.list(`profile/${auth.uid}`).valueChanges().subscribe(profile => {
         this.profile = profile;
-        console.log("profiledata: ");
-        console.log(this.profile);
-        console.log(auth);
       });
     });
 
@@ -39,7 +35,6 @@ export class ProfilePage {
 
   editProfile(){
     this.navCtrl.push(EditProfilePage);
-    console.log("button clicked");
   }
 
   deleteAccount(){
@@ -59,16 +54,12 @@ export class ProfilePage {
       this.currUser = auth;
       this.picData = firebase.storage().ref('/').child(this.currUser.uid).getDownloadURL()
         .then(function(url){
-          console.log("log1: " + url);
           return url;
         }).catch(res=>{
-          console.log("errrrrrrrrrrrrrrrrrrrrrr");
+          console.log("error");
         });
       this.afDatabase.list(`profile/${auth.uid}`).valueChanges().subscribe(profile => {
         this.profile = profile;
-        console.log("profiledata: ");
-        console.log(this.profile);
-        console.log(auth);
       });
     });
   }
