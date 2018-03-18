@@ -22,7 +22,6 @@ export class HomePage {
   pendingEvents: any = [];
   acceptedEvents: any = [];
 
-
   constructor(public navParams: NavParams, private afAuth: AngularFireAuth, public navCtrl: NavController,
               private toast: ToastController, public menu: MenuController, private afDatabase :AngularFireDatabase,
               private notificationsProvider: NotificationsProvider) {
@@ -30,6 +29,21 @@ export class HomePage {
     this.afAuth.authState.subscribe(auth => {
       this.afDatabase.list(`profile/${auth.uid}`).valueChanges().subscribe(profile => {
         this.profile = profile[0];
+        });
+      this.afDatabase.list(`settings/${auth.uid}/notification`).valueChanges().subscribe(profile => {
+        console.log(profile[0]["notification"]);
+        if(profile[0]["notification"]==true){
+          var notificationOpenedCallback = function(jsonData) {
+            console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+          };
+
+          window["plugins"].OneSignal
+            .startInit("69996f67-593b-4a96-b44f-b15c68d0ee53", "258729076239")
+            .handleNotificationOpened(notificationOpenedCallback)
+            .endInit();
+
+          window["plugins"].OneSignal.sendTag("uid", this.uId);
+        }
       });
     });
   }
@@ -38,17 +52,6 @@ export class HomePage {
     this.afAuth.authState.subscribe(data=>{
       if(/*data && data.email && */data.uid) {
         this.uId = data.uid;
-
-        var notificationOpenedCallback = function(jsonData) {
-          console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
-        };
-
-        window["plugins"].OneSignal
-          .startInit("69996f67-593b-4a96-b44f-b15c68d0ee53", "258729076239")
-          .handleNotificationOpened(notificationOpenedCallback)
-          .endInit();
-
-        window["plugins"].OneSignal.sendTag("uid", this.uId);
 
         this.toast.create({
           message: `Welcome to Raduno, ${data.email}`,

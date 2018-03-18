@@ -1,11 +1,13 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import {AngularFireDatabase} from "angularfire2/database";
+import {AngularFireAuth} from "angularfire2/auth";
 
 @Injectable()
 export class NotificationsProvider {
   apiUrl = 'https://onesignal.com/api/v1/notifications';
 
-  constructor(public http: HttpClient) {
+  constructor(public http: HttpClient, public afAuth: AngularFireAuth, private afDatabase :AngularFireDatabase) {
     console.log('Hello NotificationsProvider Provider');
   }
 

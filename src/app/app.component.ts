@@ -12,6 +12,9 @@ import {FAQsPage} from "../pages/fa-qs/fa-qs";
 import {AngularFireAuth} from "angularfire2/auth";
 import { TabsPage } from "../pages/tabs/tabs";
 import moment from 'moment';
+import {HomePage} from "../pages/home/home";
+import firebase from "firebase";
+import {AngularFireDatabase} from "angularfire2/database";
 
 export interface PageInterface {
   title: string;
@@ -36,7 +39,7 @@ export class MyApp {
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
-              public afAuth: AngularFireAuth) {
+              public afAuth: AngularFireAuth, private afDatabase :AngularFireDatabase) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -44,6 +47,8 @@ export class MyApp {
       statusBar.styleDefault();
       moment.locale('en');
       splashScreen.hide();
+
+
 
       // var notificationOpenedCallback = function(jsonData) {
       //   console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
