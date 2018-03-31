@@ -15,6 +15,7 @@ import moment from 'moment';
 import {HomePage} from "../pages/home/home";
 import firebase from "firebase";
 import {AngularFireDatabase} from "angularfire2/database";
+import {AboutusPage} from "../pages/aboutus/aboutus";
 
 export interface PageInterface {
   title: string;
@@ -35,7 +36,8 @@ export class MyApp {
     { title: 'Profile', pageName: 'TabsPage', component: ProfilePage, index: 0, icon: 'person' },
     { title: 'Settings', pageName: 'TabsPage', component: SettingsPage, index: 1, icon: "settings" },
     { title: 'Feedback', pageName: 'TabsPage', component: FeedbackPage, index: 2, icon: "star" },
-    { title: 'FAQs', pageName: 'TabsPage', component: FAQsPage, index: 3, icon: "help" }
+    { title: 'FAQs', pageName: 'TabsPage', component: FAQsPage, index: 3, icon: "help" },
+    { title: 'About Us', pageName: 'TabsPage', component: AboutusPage, index: 4, icon: "contacts" }
   ];
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,

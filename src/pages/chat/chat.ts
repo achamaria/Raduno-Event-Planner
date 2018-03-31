@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import { IonicPage, NavController, NavParams} from 'ionic-angular';
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
 import firebase from "firebase";
 import {NotificationsProvider} from "../../providers/notifications/notifications";
 import {FirebaseListObservable} from "angularfire2/database-deprecated";
-import {TabsPage} from "../tabs/tabs";
 
 @IonicPage()
 @Component({

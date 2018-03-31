@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Events, ViewController } from 'ionic-angular';
-import {GreetingPage} from "../greeting/greeting";
 /**
  * Generated class for the DefaultGreetingPage page.
  *

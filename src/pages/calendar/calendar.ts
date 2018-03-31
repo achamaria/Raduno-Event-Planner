@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
-import {IonicPage, NavController, Platform, NavParams, MenuController} from 'ionic-angular';
+import {IonicPage, NavController, Platform, NavParams} from 'ionic-angular';
 import {AngularFireDatabase} from "angularfire2/database/database";
 import { HostEventProvider } from '../../providers/host-event/host-event';
-import {TabsPage} from "../tabs/tabs";
 import {AngularFireAuth} from "angularfire2/auth";
 import moment from "moment";
-import { Calendar } from '@ionic-native/calendar';
-import {getHostElement} from "@angular/core/src/render3/component";
+import {ViewEventPage}  from "../view-event/view-event";
 /**
  * Generated class for the CalendarPage page.
  *
@@ -21,35 +19,34 @@ import {getHostElement} from "@angular/core/src/render3/component";
   providers: [HostEventProvider]
 })
 export class CalendarPage {
-  events: any = [];
+  profile: any = [];
   hostedEvents: any = [];
   eventDate: any;
   date: any;
-  name: any;
+  selectedDate: any;
   e: any;
   listedEvents: any = [];
-  profile: any = [];
   currUser: any;
-  currDate: any = new Date();
-  currentEvents: any = [];
-  calendars = [];
-
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public hostEventsProvider: HostEventProvider,
-              private afDatabase: AngularFireDatabase, private afAuth: AngularFireAuth, private calendar: Calendar, private plt: Platform) {
+              private afDatabase: AngularFireDatabase, private afAuth: AngularFireAuth, private plt: Platform) {
 
     this.plt.ready().then(() => {
       console.log("platform is ready");
     })
   }
 
+  ionViewWillEnter(){
+    console.log('ionViewWillEnter CalendarPage');
+  }
+
   //this method is called when date is selected from the calendar
   onDaySelect(e){
     //stores selected date into 'name'
-    this.name= (e.month+1) + "/" + e.date + "/"+ e.year;
-    this.getHostedEventsForChat();
-
+    this.selectedDate = (e.month+1) + "/" + e.date + "/"+ e.year;
+    this.getEventsForCalendar();
   }
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad CalendarPage');
     this.afAuth.authState.subscribe(auth => {
@@ -60,8 +57,7 @@ export class CalendarPage {
     });
   }
 
-
-  getHostedEventsForChat(){
+  getEventsForCalendar(){
 
     this.afDatabase.list('/event/').valueChanges()
       .subscribe(eventSnapshots=>{
@@ -73,8 +69,8 @@ export class CalendarPage {
           this.eventDate = event["date"];
           console.log("event date entered");
           this.eventDate = moment(this.eventDate).format('l');// converting the eventDate into format of 'm/d/yyyy'
-          console.log("check Selected date :"+ this.name.toString() + "& Event Date :" +this.eventDate.toString());
-          if(this.name.toString() == this.eventDate.toString())
+          console.log("check Selected date :"+ this.selectedDate.toString() + "& Event Date :" +this.eventDate.toString());
+          if(this.selectedDate.toString() == this.eventDate.toString())
           {
             console.log("is equal. Event with selected date exists.");
             invitees.forEach(invitee=>{
@@ -98,13 +94,14 @@ export class CalendarPage {
       });
   }
 
-
-
-  ionViewWillEnter(){
-    console.log('ionViewWillEnter CalendarPage');
-  }
-
-  moveToEventPreview(){
-    this.navCtrl.push(TabsPage);
+  eventPreview(key: string){
+    this.afDatabase.list('/event/').valueChanges()
+      .subscribe(values=>{
+        values.map(value=>{
+          if(value["key"] == key){
+            this.navCtrl.push(ViewEventPage,{viewEvent : JSON.stringify(value)});
+          }
+        });
+      });
   }
 }

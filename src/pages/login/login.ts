@@ -6,8 +6,6 @@ import { ForgotPasswordPage } from "../forgot-password/forgot-password";
 import { RegisterPage } from "../register/register";
 import {TabsPage} from "../tabs/tabs";
 import {User} from "../../models/user";
-// import {AngularFireAuth} from "angularfire2/auth";
-import {HomePage} from "../home/home";
 import {AngularFireAuth} from "angularfire2/auth";
 
 /**

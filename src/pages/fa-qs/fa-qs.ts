@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {FaqProvider} from "../../providers/faq/faq";
-import {query} from "@angular/core/src/animation/dsl";
 
 @IonicPage()
 @Component({

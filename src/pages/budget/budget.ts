@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, MenuController, ModalController, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, MenuController, ModalController } from 'ionic-angular';
 import { HostEventProvider } from '../../providers/host-event/host-event';
 import firebase from "firebase";
 import {AddExpensePage} from "../add-expense/add-expense";

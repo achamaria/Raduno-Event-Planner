@@ -46,6 +46,7 @@ import {EventSummaryPage} from "../pages/event-summary/event-summary";
 import { CalendarModule } from 'ionic3-calendar-en';
 import {Calendar} from "@ionic-native/calendar";
 import {SMS} from "@ionic-native/sms";
+import {AboutusPage} from "../pages/aboutus/aboutus";
 
 
 @NgModule({
@@ -70,7 +71,8 @@ import {SMS} from "@ionic-native/sms";
     ViewEventPage,
     AddExpensePage,
     DefaultGreetingPage,
-    EventSummaryPage
+    EventSummaryPage,
+    AboutusPage
   ],
   imports: [
     BrowserModule,
@@ -105,7 +107,8 @@ import {SMS} from "@ionic-native/sms";
     ViewEventPage,
     AddExpensePage,
     DefaultGreetingPage,
-    EventSummaryPage
+    EventSummaryPage,
+    AboutusPage
   ],
   providers: [
     StatusBar,

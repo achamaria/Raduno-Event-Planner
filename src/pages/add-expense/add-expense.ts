@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams, ViewController} from 'ionic-angular';
-import {TabsPage} from "../tabs/tabs";
 import {AngularFireAuth} from "angularfire2/auth";
 import {AngularFireDatabase} from "angularfire2/database";
-import {BudgetPage} from "../budget/budget";
 
 /**
  * Generated class for the AddExpensePage page.

@@ -1,15 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import {Validators, FormBuilder, FormGroup, AbstractControl} from '@angular/forms';
+import {Validators, FormBuilder, FormGroup} from '@angular/forms';
 import {AngularFireAuth} from "angularfire2/auth";
-import { HomePage } from "../home/home";
 import { LoginPage } from "../login/login";
 import {TabsPage} from "../tabs/tabs";
 import {User} from "../../models/user";
 import {Profile} from "../../models/profile";
 import {AngularFireDatabase} from "angularfire2/database";
-import {UsernameValidator} from "../../validators/username";
-
 
 @IonicPage()
 @Component({

@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angu
 import {Validators, FormBuilder, FormGroup, AbstractControl} from '@angular/forms';
 import { LoginPage } from "../login/login";
 import {AngularFireAuth} from "angularfire2/auth";
-import {TabsPage} from "../tabs/tabs";
 /**
  * Generated class for the ForgotPasswordPage page.
  *

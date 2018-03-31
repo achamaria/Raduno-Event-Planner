@@ -7,11 +7,11 @@
   <button ion-button id="today-btn" small ion-button (click)="calendar.today()">Jump to Today</button>
 
   <ion-item >
-    <ion-list (ngModelChange)="getHostedEventsForChat()">
+    <ion-list (ngModelChange)="getEventsForCalendar()">
       <div *ngFor="let lev of listedEvents">
         <div>
-          <button ion-item (click)="moveToEventPreview()" [value]="lev.key">
-            {{lev["title"]}}{{lev["date"]}}
+          <button ion-item (click)="eventPreview(lev.key)" [value]="lev.key">
+            {{lev["title"]}}
           </button>
         </div>
         <ng-template #unselectedOption>

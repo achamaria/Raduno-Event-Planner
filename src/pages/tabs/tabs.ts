@@ -9,6 +9,7 @@ import {ProfilePage} from "../profile/profile";
 import {SettingsPage} from "../settings/settings";
 import {FeedbackPage} from "../feedback/feedback";
 import {FAQsPage} from "../fa-qs/fa-qs";
+import {AboutusPage} from "../aboutus/aboutus";
 
 /**
  * Generated class for the TabsPage page.
@@ -33,6 +34,7 @@ export class TabsPage {
   settingsRoot = SettingsPage;
   feedbackRoot = FeedbackPage;
   faqRoot = FAQsPage;
+  aboutRoot = AboutusPage;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
 

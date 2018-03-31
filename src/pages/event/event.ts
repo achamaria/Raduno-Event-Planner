@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {AlertController, DateTime, IonicPage, NavController, NavParams} from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import {GreetingPage} from "../greeting/greeting";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AngularFireDatabase} from "angularfire2/database";
