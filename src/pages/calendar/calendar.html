@@ -6,8 +6,7 @@
 
   <button ion-button id="today-btn" small ion-button (click)="calendar.today()">Jump to Today</button>
 
-  <ion-item >
-    <ion-list (ngModelChange)="getEventsForCalendar()">
+  <ion-list (ngModelChange)="getEventsForCalendar()">
       <div *ngFor="let lev of listedEvents">
         <div>
           <button ion-item (click)="eventPreview(lev.key)" [value]="lev.key">
@@ -18,8 +17,6 @@
           <ion-option [value]="lev.key">{{lev["title"]}}</ion-option>
         </ng-template>
       </div>
-
-    </ion-list>
-  </ion-item>
+  </ion-list>
 
 </ion-content>

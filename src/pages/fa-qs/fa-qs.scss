@@ -9,7 +9,8 @@ page-fa-qs {
   }
 
   .innerMessage.messageLeft{
-    background: #04b456;
+    background: color($colors, light);
+    color: color($colors, 'primary') ;
   }
 
   .username{

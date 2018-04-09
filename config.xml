@@ -3,7 +3,7 @@
     <name>RADUNO_EventPlanningApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.0.13:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -87,6 +87,7 @@
     <allow-navigation href="http://192.168.0.15:8100" />
     <allow-navigation href="http://10.4.95.35:8100" />
     <allow-navigation href="http://10.4.92.119:8100" />
+    <allow-navigation href="http://192.168.0.13:8100" />
     <engine name="android" spec="^6.3.0" />
     <plugin name="cordova-plugin-inappbrowser" spec="^2.0.2" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />

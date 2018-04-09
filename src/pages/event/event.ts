@@ -85,6 +85,10 @@ export class EventPage {
             }
 
             // checks for the past date and cuurent date
+            console.log(newEventDate.toLocaleDateString());
+            console.log(newEventDate.toLocaleDateString() <= new Date(this.currDate).toLocaleDateString());
+
+
             if(newEventDate.toLocaleDateString() <= new Date(this.currDate).toLocaleDateString()){
               let alert = this.alertCtrl.create({
                 title: 'Error!',
